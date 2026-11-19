@@ -3,67 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kaf8 - Disaster Assistance & Care Management System</title>
-    <!-- Tailwind CSS CDN -->
+    <title>Kaf8 — Disaster Assistance & Care Management System</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
+        .tabular-nums { font-variant-numeric: tabular-nums; }
+        /* Custom subtle scrollbars */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-view { animation: fadeSlideUp 0.22s ease-out forwards; }
+        body.theme-dark {
+            color-scheme: dark;
+            background-color: #0f172a !important;
+            color: #e2e8f0 !important;
+        }
+        body.theme-dark[class~="bg-slate-100/80"][class~="text-slate-800"] {
+            background-color: #0f172a !important;
+            color: #e2e8f0 !important;
+        }
+        .theme-dark [class~="bg-white"],
+        .theme-dark [class~="bg-white/90"],
+        .theme-dark [class~="bg-slate-50"],
+        .theme-dark [class~="bg-slate-50/40"],
+        .theme-dark [class~="bg-slate-50/60"],
+        .theme-dark [class~="bg-slate-50/70"],
+        .theme-dark [class~="bg-slate-100"],
+        .theme-dark [class~="bg-slate-200"] { background-color: #1e293b !important; }
+        .theme-dark [class~="bg-blue-50"],
+        .theme-dark [class~="bg-blue-50/40"],
+        .theme-dark [class~="bg-blue-50/50"],
+        .theme-dark [class~="bg-blue-50/60"],
+        .theme-dark [class~="bg-blue-100"] { background-color: #1e3a5f !important; }
+        .theme-dark [class~="bg-emerald-50"],
+        .theme-dark [class~="bg-emerald-100"] { background-color: #123b35 !important; }
+        .theme-dark [class~="bg-rose-50"],
+        .theme-dark [class~="bg-rose-100"] { background-color: #4c1d2b !important; }
+        .theme-dark [class~="bg-amber-50"],
+        .theme-dark [class~="bg-amber-50/90"],
+        .theme-dark [class~="bg-amber-100"] { background-color: #45351b !important; }
+        .theme-dark [class~="bg-purple-50"],
+        .theme-dark [class~="bg-purple-100"] { background-color: #352453 !important; }
+        .theme-dark [class~="text-slate-900"] { color: #f1f5f9 !important; }
+        .theme-dark [class~="text-slate-800"],
+        .theme-dark [class~="text-slate-700"] { color: #e2e8f0 !important; }
+        .theme-dark [class~="text-slate-600"] { color: #cbd5e1 !important; }
+        .theme-dark [class~="text-slate-500"],
+        .theme-dark [class~="text-slate-400"] { color: #94a3b8 !important; }
+        .theme-dark [class~="text-blue-800"],
+        .theme-dark [class~="text-blue-900"],
+        .theme-dark [class~="text-blue-700"] { color: #bfdbfe !important; }
+        .theme-dark [class~="text-emerald-800"],
+        .theme-dark [class~="text-emerald-700"] { color: #a7f3d0 !important; }
+        .theme-dark [class~="text-rose-800"],
+        .theme-dark [class~="text-rose-700"] { color: #fecdd3 !important; }
+        .theme-dark [class~="text-amber-950"],
+        .theme-dark [class~="text-amber-900"],
+        .theme-dark [class~="text-amber-800"] { color: #fde68a !important; }
+        .theme-dark [class~="text-purple-700"] { color: #ddd6fe !important; }
+        .theme-dark [class~="border-slate-100"],
+        .theme-dark [class~="border-slate-200"],
+        .theme-dark [class~="border-slate-200/70"],
+        .theme-dark [class~="border-slate-200/80"],
+        .theme-dark [class~="border-slate-200/90"],
+        .theme-dark [class~="border-slate-300"] { border-color: #334155 !important; }
+        .theme-dark [class~="border-blue-200"],
+        .theme-dark [class~="border-blue-300"] { border-color: #1d4ed8 !important; }
+        .theme-dark [class~="border-emerald-200"] { border-color: #047857 !important; }
+        .theme-dark [class~="border-rose-200"] { border-color: #be123c !important; }
+        .theme-dark [class~="border-amber-200"] { border-color: #92400e !important; }
+        .theme-dark [class~="border-purple-200"] { border-color: #6d28d9 !important; }
+        .theme-dark [class~="hover:bg-slate-50/70"]:hover,
+        .theme-dark [class~="hover:bg-slate-50/80"]:hover,
+        .theme-dark [class~="hover:bg-slate-100"]:hover,
+        .theme-dark [class~="hover:bg-slate-200"]:hover { background-color: #334155 !important; }
+        .theme-dark .divide-slate-100 > :not(:first-child) { border-color: #334155; }
+        .theme-dark input,
+        .theme-dark select,
+        .theme-dark textarea {
+            background-color: #1e293b !important;
+            border-color: #475569 !important;
+            color: #f1f5f9 !important;
+        }
+        .theme-dark input::placeholder,
+        .theme-dark textarea::placeholder { color: #94a3b8; }
+        @media (prefers-reduced-motion: reduce) {
+            .animate-view { animation: none; }
+        }
+    </style>
 </head>
-<body class="bg-slate-50 font-sans text-slate-800 antialiased">
+<body class="bg-slate-100/80 text-slate-800 antialiased selection:bg-blue-600 selection:text-white">
 
     <div class="flex h-screen overflow-hidden">
         
+        <!-- Mobile Sidebar Backdrop -->
+        <div id="mobile-backdrop" onclick="toggleMobileSidebar(false)" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-30 hidden md:hidden transition-opacity"></div>
+
         <!-- Sidebar -->
-        <aside class="w-64 bg-slate-900 text-slate-300 flex flex-col justify-between hidden md:flex border-r border-slate-800">
+        <aside id="sidebar" class="fixed inset-y-0 left-0 z-40 w-72 bg-slate-950 text-slate-300 flex flex-col justify-between border-r border-slate-800/80 transform -translate-x-full md:translate-x-0 md:static transition-transform duration-200 ease-in-out">
             <div>
                 <!-- Brand Header -->
-                <div class="p-5 border-b border-slate-800 flex items-center space-x-3">
-                    <div class="bg-blue-600 text-white p-2 rounded-lg">
-                        <i class="fa-solid fa-church text-xl"></i>
+                <div class="p-5 border-b border-slate-800/80 flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="bg-gradient-to-br from-blue-500 to-indigo-600 text-white w-10 h-10 rounded-xl flex items-center justify-center shadow-lg shadow-blue-600/25">
+                            <i class="fa-solid fa-church text-lg"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h1 class="font-bold text-white text-base tracking-tight">Kaf8 System</h1>
+                                <span class="text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-500/30">v2.4</span>
+                            </div>
+                            <p class="text-xs text-slate-400">JCCF Disaster & Care Ops</p>
+                        </div>
                     </div>
-                    <div>
-                        <h1 class="font-bold text-white text-sm">Kaf8 Disaster System</h1>
-                        <p class="text-xs text-slate-400">JCCF</p>
-                    </div>
+                    <button onclick="toggleMobileSidebar(false)" class="md:hidden text-slate-400 hover:text-white p-1">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
                 </div>
 
                 <!-- Navigation Links -->
-                <nav class="p-4 space-y-1">
-                    <button onclick="switchTab('dashboard')" id="nav-dashboard" class="w-full flex items-center space-x-3 px-4 py-2.5 rounded-lg text-sm font-medium bg-blue-600 text-white transition-colors">
-                        <i class="fa-solid fa-chart-pie w-5"></i>
-                        <span>Dashboard</span>
-                    </button>
-                    <button onclick="switchTab('families')" id="nav-families" class="w-full flex items-center space-x-3 px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-800 hover:text-white transition-colors">
-                        <i class="fa-solid fa-users w-5"></i>
-                        <span>Affected Families</span>
-                    </button>
-                    <button onclick="switchTab('inventory')" id="nav-inventory" class="w-full flex items-center space-x-3 px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-800 hover:text-white transition-colors">
-                        <i class="fa-solid fa-boxes-stacked w-5"></i>
-                        <span>Relief Inventory</span>
-                    </button>
-                    <button onclick="switchTab('volunteers')" id="nav-volunteers" class="w-full flex items-center space-x-3 px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-800 hover:text-white transition-colors">
-                        <i class="fa-solid fa-user-group w-5"></i>
-                        <span>Volunteers</span>
-                    </button>
-                    <button onclick="switchTab('schedule')" id="nav-schedule" class="w-full flex items-center space-x-3 px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-800 hover:text-white transition-colors">
-                        <i class="fa-solid fa-calendar-days w-5"></i>
-                        <span>Schedule & Calendar</span>
-                    </button>
-                    <button onclick="switchTab('pastoral')" id="nav-pastoral" class="w-full flex items-center space-x-3 px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-800 hover:text-white transition-colors">
-                        <i class="fa-solid fa-hand-holding-heart w-5"></i>
-                        <span>Pastoral Care <span class="ml-auto bg-amber-500/20 text-amber-400 text-[10px] px-1.5 py-0.5 rounded">Secure</span></span>
-                    </button>
-                </nav>
+                <div class="px-3 pt-4 pb-2">
+                    <p class="px-3 text-[11px] font-semibold uppercase tracking-wider text-slate-500 mb-2">Operations</p>
+                    <nav class="space-y-1">
+                        <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all">
+                            <span class="flex items-center space-x-3">
+                                <i class="fa-solid fa-chart-pie w-5 text-center"></i>
+                                <span>Command Dashboard</span>
+                            </span>
+                        </button>
+                        <button onclick="switchTab('families')" id="nav-families" class="nav-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all">
+                            <span class="flex items-center space-x-3">
+                                <i class="fa-solid fa-users w-5 text-center"></i>
+                                <span>Affected Families</span>
+                            </span>
+                            <span id="badge-pending-families" class="text-xs font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 tabular-nums">0</span>
+                        </button>
+                        <button onclick="switchTab('inventory')" id="nav-inventory" class="nav-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all">
+                            <span class="flex items-center space-x-3">
+                                <i class="fa-solid fa-boxes-stacked w-5 text-center"></i>
+                                <span>Relief Inventory</span>
+                            </span>
+                            <span id="badge-low-stock" class="hidden text-xs font-bold px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 tabular-nums">!</span>
+                        </button>
+                        <button onclick="switchTab('volunteers')" id="nav-volunteers" class="nav-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all">
+                            <span class="flex items-center space-x-3">
+                                <i class="fa-solid fa-user-group w-5 text-center"></i>
+                                <span>Volunteers</span>
+                            </span>
+                        </button>
+                        <button onclick="switchTab('schedule')" id="nav-schedule" class="nav-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all">
+                            <span class="flex items-center space-x-3">
+                                <i class="fa-solid fa-calendar-days w-5 text-center"></i>
+                                <span>Schedule & Calendar</span>
+                            </span>
+                        </button>
+                    </nav>
+
+                    <p class="px-3 text-[11px] font-semibold uppercase tracking-wider text-slate-500 mt-6 mb-2">Confidential Care</p>
+                    <nav class="space-y-1">
+                        <button onclick="switchTab('pastoral')" id="nav-pastoral" class="nav-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all">
+                            <span class="flex items-center space-x-3">
+                                <i class="fa-solid fa-hand-holding-heart w-5 text-center"></i>
+                                <span>Pastoral Care</span>
+                            </span>
+                            <span id="pastoral-lock-pill" class="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-semibold px-2 py-0.5 rounded-md flex items-center gap-1">
+                                <i class="fa-solid fa-lock text-[9px]"></i> Restricted
+                            </span>
+                        </button>
+                    </nav>
+                </div>
             </div>
 
-            <!-- User Footer -->
-            <div class="p-4 border-t border-slate-800 flex items-center space-x-3">
-                <div class="bg-slate-700 w-9 h-9 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                    AD
-                </div>
-                <div class="overflow-hidden">
-                    <p class="text-sm font-medium text-white truncate">Admin Coordinator</p>
-                    <p class="text-xs text-slate-400 truncate">Kaf8 Authorized User</p>
+            <!-- Sidebar Footer -->
+            <div class="p-4 border-t border-slate-800/80 space-y-3">
+                <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-3 flex items-center justify-between">
+                    <div class="flex items-center space-x-3 min-w-0">
+                        <div class="bg-gradient-to-tr from-blue-600 to-cyan-500 w-9 h-9 rounded-lg flex items-center justify-center text-white font-bold text-xs shrink-0 shadow">
+                            AD
+                        </div>
+                        <div class="overflow-hidden">
+                            <p class="text-sm font-semibold text-white truncate">Admin Coordinator</p>
+                            <p class="text-xs text-slate-400 truncate">JCCF Command Desk</p>
+                        </div>
+                    </div>
+                    <button onclick="resetDemoData()" title="Reset Demo Data" class="text-slate-400 hover:text-amber-400 p-1.5 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-rotate-left text-xs"></i>
+                    </button>
                 </div>
             </div>
         </aside>
@@ -72,241 +217,497 @@
         <div class="flex-1 flex flex-col min-w-0 overflow-y-auto">
             
             <!-- Top Navbar -->
-            <header class="bg-white border-b border-slate-200 h-16 flex items-center justify-between px-6 sticky top-0 z-10">
-                <div class="flex items-center space-x-4">
-                    <h2 id="page-title" class="text-lg font-bold text-slate-800">Command Dashboard</h2>
-                </div>
+            <header class="bg-white/90 backdrop-blur-md border-b border-slate-200/90 h-16 flex items-center justify-between px-4 sm:px-6 sticky top-0 z-20">
                 <div class="flex items-center space-x-3">
-                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
-                        <span class="w-2 h-2 mr-1.5 bg-emerald-500 rounded-full"></span> System Online
-                    </span>
-                    <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">
-                        <i class="fa-solid fa-plus mr-1.5"></i> Quick Record
+                    <button id="mobile-sidebar-toggle" onclick="toggleMobileSidebar(true)" class="md:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100">
+                        <i class="fa-solid fa-bars text-lg"></i>
                     </button>
+                    <div>
+                        <h2 id="page-title" class="text-base sm:text-lg font-bold text-slate-900 leading-tight">Command Dashboard</h2>
+                        <p id="page-subtitle" class="text-xs text-slate-500 hidden sm:block">Real-time relief coordination & community care overview</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2.5 sm:space-x-3">
+                    <button id="role-toggle" type="button" onclick="switchRole(activeRole === 'admin' ? 'community' : 'admin')" aria-label="Switch to Community Portal" aria-pressed="false" class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 px-3 py-2 text-xs sm:text-sm font-semibold text-white shadow-md shadow-indigo-600/20 transition hover:brightness-110">
+                        <i id="role-toggle-icon" class="fa-solid fa-house-user" aria-hidden="true"></i>
+                        <span id="role-toggle-label" class="hidden sm:inline">Community Portal</span>
+                    </button>
+                    <button id="theme-toggle" type="button" onclick="toggleTheme()" aria-label="Switch to dark mode" aria-pressed="false" title="Switch to dark mode" class="p-2.5 rounded-xl text-slate-600 hover:bg-slate-100 transition" >
+                        <i id="theme-toggle-icon" class="fa-solid fa-moon" aria-hidden="true"></i>
+                    </button>
+                    <div id="admin-header-actions" class="flex items-center space-x-2.5 sm:space-x-3">
+                        <span class="hidden sm:inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/80">
+                            <span class="w-2 h-2 mr-2 bg-emerald-500 rounded-full animate-pulse"></span> Ops Active • Nov 19, 2026
+                        </span>
+                    <button onclick="openQuickRecordModal()" class="bg-blue-600 hover:bg-blue-700 active:scale-[0.99] text-white px-3.5 sm:px-4 py-2 rounded-xl text-sm font-semibold transition shadow-sm shadow-blue-600/20 flex items-center gap-2">
+                        <i class="fa-solid fa-bolt"></i>
+                        <span class="hidden sm:inline">Quick Record</span>
+                    </button>
+                    </div>
                 </div>
             </header>
 
             <!-- Main Dynamic View Container -->
-            <main class="p-6 space-y-6">
+            <main id="admin-main" class="p-4 sm:p-6 max-w-7xl w-full mx-auto space-y-6">
 
-                <!-- TAB 1: DASHBOARD -->
-                <section id="tab-dashboard" class="space-y-6">
+                <!-- ==================== TAB 1: DASHBOARD ==================== -->
+                <section id="tab-dashboard" class="space-y-6 animate-view">
+                    <div class="relative isolate overflow-hidden rounded-3xl bg-gradient-to-r from-blue-700 via-indigo-700 to-violet-700 p-6 sm:p-8 text-white shadow-xl shadow-indigo-900/15">
+                        <div class="absolute -right-10 -top-14 -z-10 h-48 w-48 rounded-full bg-cyan-300/20 blur-3xl"></div>
+                        <div class="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+                            <div>
+                                <span class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-blue-50">
+                                    <i class="fa-solid fa-sparkles"></i> Response command
+                                </span>
+                                <h3 class="mt-4 text-2xl sm:text-3xl font-extrabold tracking-tight">Good day, Operations Team</h3>
+                                <p class="mt-2 max-w-2xl text-sm text-blue-100">One coordinated view of relief, response teams, and community care.</p>
+                            </div>
+                            <button onclick="switchTab('families')" class="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-bold text-indigo-700 shadow-lg transition hover:bg-blue-50">
+                                <i class="fa-solid fa-arrow-right"></i> Open response queue
+                            </button>
+                        </div>
+                    </div>
                     <!-- Metric Cards -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                        <div onclick="switchTab('families')" class="cursor-pointer group bg-white p-5 rounded-2xl border border-slate-200/90 shadow-xs hover:shadow-md hover:border-blue-300 transition-all">
                             <div class="flex justify-between items-start">
                                 <div>
-                                    <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Affected Families</p>
-                                    <h3 class="text-2xl font-bold text-slate-800 mt-1">145</h3>
+                                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Affected Families</p>
+                                    <h3 id="stat-total-families" class="text-3xl font-extrabold text-slate-900 mt-1.5 tabular-nums">0</h3>
                                 </div>
-                                <div class="bg-blue-50 text-blue-600 p-3 rounded-lg"><i class="fa-solid fa-users"></i></div>
+                                <div class="bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors p-3 rounded-xl">
+                                    <i class="fa-solid fa-users text-lg"></i>
+                                </div>
                             </div>
-                            <p class="text-xs text-slate-500 mt-3"><span class="text-amber-600 font-medium">23 Pending</span> initial aid</p>
+                            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                                <span id="stat-pending-families" class="text-amber-600 font-semibold">0 Pending initial aid</span>
+                                <span class="text-slate-400 group-hover:text-blue-600 transition">View →</span>
+                            </div>
                         </div>
-                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+
+                        <div onclick="switchTab('inventory')" class="cursor-pointer group bg-white p-5 rounded-2xl border border-slate-200/90 shadow-xs hover:shadow-md hover:border-emerald-300 transition-all">
                             <div class="flex justify-between items-start">
                                 <div>
-                                    <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Relief Packs Available</p>
-                                    <h3 class="text-2xl font-bold text-slate-800 mt-1">1,240</h3>
+                                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Relief Stock Units</p>
+                                    <h3 id="stat-total-stock" class="text-3xl font-extrabold text-slate-900 mt-1.5 tabular-nums">0</h3>
                                 </div>
-                                <div class="bg-emerald-50 text-emerald-600 p-3 rounded-lg"><i class="fa-solid fa-box-open"></i></div>
+                                <div class="bg-emerald-50 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors p-3 rounded-xl">
+                                    <i class="fa-solid fa-box-open text-lg"></i>
+                                </div>
                             </div>
-                            <p class="text-xs text-slate-500 mt-3"><span class="text-emerald-600 font-medium">184 distributed</span> today</p>
+                            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                                <span id="stat-stock-alerts" class="text-emerald-600 font-semibold">All levels healthy</span>
+                                <span class="text-slate-400 group-hover:text-emerald-600 transition">Ledger →</span>
+                            </div>
                         </div>
-                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+
+                        <div onclick="switchTab('volunteers')" class="cursor-pointer group bg-white p-5 rounded-2xl border border-slate-200/90 shadow-xs hover:shadow-md hover:border-purple-300 transition-all">
                             <div class="flex justify-between items-start">
                                 <div>
-                                    <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Active Volunteers</p>
-                                    <h3 class="text-2xl font-bold text-slate-800 mt-1">68</h3>
+                                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Active Volunteers</p>
+                                    <h3 id="stat-deployed-volunteers" class="text-3xl font-extrabold text-slate-900 mt-1.5 tabular-nums">0</h3>
                                 </div>
-                                <div class="bg-purple-50 text-purple-600 p-3 rounded-lg"><i class="fa-solid fa-hands-holding-child"></i></div>
+                                <div class="bg-purple-50 text-purple-600 group-hover:bg-purple-600 group-hover:text-white transition-colors p-3 rounded-xl">
+                                    <i class="fa-solid fa-hands-holding-child text-lg"></i>
+                                </div>
                             </div>
-                            <p class="text-xs text-slate-500 mt-3"><span class="text-purple-600 font-medium">4 teams</span> deployed</p>
+                            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                                <span id="stat-standby-volunteers" class="text-purple-600 font-semibold">0 on standby</span>
+                                <span class="text-slate-400 group-hover:text-purple-600 transition">Roster →</span>
+                            </div>
                         </div>
-                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+
+                        <div onclick="switchTab('pastoral')" class="cursor-pointer group bg-white p-5 rounded-2xl border border-slate-200/90 shadow-xs hover:shadow-md hover:border-amber-300 transition-all">
                             <div class="flex justify-between items-start">
                                 <div>
-                                    <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Pastoral Support Cases</p>
-                                    <h3 class="text-2xl font-bold text-slate-800 mt-1">32</h3>
+                                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Pastoral Care Cases</p>
+                                    <h3 id="stat-pastoral-cases" class="text-3xl font-extrabold text-slate-900 mt-1.5 tabular-nums">0</h3>
                                 </div>
-                                <div class="bg-amber-50 text-amber-600 p-3 rounded-lg"><i class="fa-solid fa-heart-pulse"></i></div>
+                                <div class="bg-amber-50 text-amber-600 group-hover:bg-amber-500 group-hover:text-white transition-colors p-3 rounded-xl">
+                                    <i class="fa-solid fa-heart-pulse text-lg"></i>
+                                </div>
                             </div>
-                            <p class="text-xs text-slate-500 mt-3"><span class="text-blue-600 font-medium">12 visits</span> scheduled</p>
+                            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                                <span id="stat-pastoral-visits" class="text-blue-600 font-semibold">0 follow-ups scheduled</span>
+                                <span class="text-slate-400 group-hover:text-amber-600 transition">Portal →</span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Recent Activity Table / Quick View -->
-                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-                        <div class="px-6 py-4 border-b border-slate-200 flex justify-between items-center">
-                            <h3 class="font-bold text-slate-800">Recent Disaster Response & Assistance Workflow</h3>
-                            <button onclick="switchTab('families')" class="text-sm text-blue-600 hover:text-blue-800 font-medium">View All Families →</button>
+                    <!-- Analytics & Live Feed Split -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Barangay Coverage Breakdown -->
+                        <div class="bg-white rounded-2xl border border-slate-200/90 shadow-xs p-5 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <div>
+                                        <h3 class="font-bold text-slate-900 text-sm">Barangay Aid Coverage</h3>
+                                        <p class="text-xs text-slate-500">Completion rate by affected zone</p>
+                                    </div>
+                                    <span class="text-xs font-semibold px-2.5 py-1 rounded-lg bg-slate-100 text-slate-600">Live</span>
+                                </div>
+                                <div id="barangay-progress-list" class="space-y-4"></div>
+                            </div>
+                            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                                <span>Priority focus: <strong class="text-slate-800">High-need zones</strong></span>
+                                <button onclick="openFamilyModal()" class="text-blue-600 hover:underline font-semibold">+ Add Household</button>
+                            </div>
                         </div>
+
+                        <!-- Recent Activity & Quick Triage Table -->
+                        <div class="lg:col-span-2 bg-white rounded-2xl border border-slate-200/90 shadow-xs overflow-hidden flex flex-col">
+                            <div class="px-5 py-4 border-b border-slate-200/80 flex flex-wrap gap-2 justify-between items-center">
+                                <div>
+                                    <h3 class="font-bold text-slate-900 text-sm">Priority Disaster Response Queue</h3>
+                                    <p class="text-xs text-slate-500">Click "Manage" to dispatch aid or update household status</p>
+                                </div>
+                                <button onclick="switchTab('families')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-3 py-1.5 rounded-lg transition">
+                                    Full Registry →
+                                </button>
+                            </div>
+                            <div class="overflow-x-auto flex-1">
+                                <table class="w-full text-left border-collapse">
+                                    <thead class="bg-slate-50/90 text-slate-500 text-[11px] uppercase tracking-wider border-b border-slate-200/80">
+                                        <tr>
+                                            <th class="px-5 py-3">Household</th>
+                                            <th class="px-5 py-3">Barangay</th>
+                                            <th class="px-5 py-3">Primary Needs</th>
+                                            <th class="px-5 py-3">Status</th>
+                                            <th class="px-5 py-3 text-right">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="dashboard-families-tbody" class="divide-y divide-slate-100 text-sm text-slate-700"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ==================== TAB 2: AFFECTED FAMILIES ==================== -->
+                <section id="tab-families" class="space-y-5 hidden animate-view">
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div>
+                            <h3 class="text-base font-bold text-slate-900">Affected Family Registry</h3>
+                            <p class="text-xs text-slate-500">Track household vulnerability profiles, evacuation locations, and relief dispatch history.</p>
+                        </div>
+                        <button onclick="openFamilyModal()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition shadow-xs flex items-center justify-center gap-2 shrink-0">
+                            <i class="fa-solid fa-user-plus"></i> Register New Family
+                        </button>
+                    </div>
+
+                    <!-- Filters Bar -->
+                    <div class="bg-white p-4 rounded-2xl border border-slate-200/90 shadow-xs flex flex-col md:flex-row gap-3 justify-between">
+                        <div class="relative flex-1">
+                            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                            <input type="text" id="family-search" oninput="renderFamilies()" placeholder="Search by family name, barangay, or vulnerability tag..." class="w-full pl-10 pr-4 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500">
+                        </div>
+                        <div class="flex flex-wrap items-center gap-2">
+                            <select id="family-status-filter" onchange="renderFamilies()" class="text-sm bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-medium text-slate-700 focus:outline-none focus:border-blue-500">
+                                <option value="All">All Statuses</option>
+                                <option value="Pending">Pending Aid</option>
+                                <option value="Ongoing">Ongoing Support</option>
+                                <option value="Completed">Completed</option>
+                            </select>
+                            <select id="family-barangay-filter" onchange="renderFamilies()" class="text-sm bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-medium text-slate-700 focus:outline-none focus:border-blue-500">
+                                <option value="All">All Barangays</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Full Registry Table -->
+                    <p id="family-results-count" class="text-xs text-slate-500" aria-live="polite"></p>
+                    <div class="bg-white rounded-2xl border border-slate-200/90 shadow-xs overflow-hidden">
                         <div class="overflow-x-auto">
                             <table class="w-full text-left border-collapse">
-                                <thead class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider border-b border-slate-200">
+                                <thead class="bg-slate-50 text-slate-500 text-[11px] uppercase tracking-wider border-b border-slate-200">
                                     <tr>
-                                        <th class="px-6 py-3">Family Name</th>
-                                        <th class="px-6 py-3">Barangay / Location</th>
-                                        <th class="px-6 py-3">Primary Needs</th>
-                                        <th class="px-6 py-3">Status</th>
-                                        <th class="px-6 py-3 text-right">Actions</th>
+                                        <th class="px-5 py-3.5">Family / Size</th>
+                                        <th class="px-5 py-3.5">Location / Zone</th>
+                                        <th class="px-5 py-3.5">Vulnerability Tags</th>
+                                        <th class="px-5 py-3.5">Requested Needs</th>
+                                        <th class="px-5 py-3.5">Status</th>
+                                        <th class="px-5 py-3.5 text-right">Manage</th>
                                     </tr>
                                 </thead>
-                                <tbody class="divide-y divide-slate-200 text-sm text-slate-700">
-                                    <tr>
-                                        <td class="px-6 py-4 font-medium text-slate-900">Santos Family</td>
-                                        <td class="px-6 py-4">Brgy. Sto. Niño</td>
-                                        <td class="px-6 py-4">Food packs, Potable Water</td>
-                                        <td class="px-6 py-4"><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-800">Pending</span></td>
-                                        <td class="px-6 py-4 text-right"><button class="text-blue-600 hover:underline font-medium">Manage</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 font-medium text-slate-900">Dela Cruz Household</td>
-                                        <td class="px-6 py-4">Brgy. San Jose</td>
-                                        <td class="px-6 py-4">Hygiene kits, Clothing</td>
-                                        <td class="px-6 py-4"><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">Ongoing</span></td>
-                                        <td class="px-6 py-4 text-right"><button class="text-blue-600 hover:underline font-medium">Manage</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 font-medium text-slate-900">Bautista Family</td>
-                                        <td class="px-6 py-4">Brgy. Maligaya</td>
-                                        <td class="px-6 py-4">Shelter materials, Food</td>
-                                        <td class="px-6 py-4"><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800">Completed</span></td>
-                                        <td class="px-6 py-4 text-right"><button class="text-blue-600 hover:underline font-medium">Manage</button></td>
-                                    </tr>
-                                </tbody>
+                                <tbody id="families-full-tbody" class="divide-y divide-slate-100 text-sm"></tbody>
                             </table>
                         </div>
                     </div>
                 </section>
 
-                <!-- TAB 2: AFFECTED FAMILIES -->
-                <section id="tab-families" class="space-y-6 hidden">
-                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex justify-between items-center">
+                <!-- ==================== TAB 3: RELIEF INVENTORY ==================== -->
+                <section id="tab-inventory" class="space-y-5 hidden animate-view">
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                         <div>
-                            <h3 class="text-lg font-bold text-slate-800">Affected Family Registry</h3>
-                            <p class="text-xs text-slate-500">Intake profiles, vulnerability mapping, and historical aid timelines.</p>
+                            <h3 class="text-base font-bold text-slate-900">Donation & Relief Supply Ledger</h3>
+                            <p class="text-xs text-slate-500">Real-time warehouse stock levels, critical restock thresholds, and inbound/outbound logs.</p>
                         </div>
-                        <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">
-                            <i class="fa-solid fa-user-plus mr-1.5"></i> Register New Family
-                        </button>
+                        <div class="flex items-center gap-2.5">
+                            <button onclick="openInventoryModal('outbound')" class="bg-slate-100 hover:bg-slate-200 text-slate-800 px-4 py-2.5 rounded-xl text-sm font-semibold transition flex items-center gap-2">
+                                <i class="fa-solid fa-truck-ramp-box text-slate-600"></i> Dispatch Stock
+                            </button>
+                            <button onclick="openInventoryModal('inbound')" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition shadow-xs flex items-center gap-2">
+                                <i class="fa-solid fa-plus"></i> Log Donation
+                            </button>
+                        </div>
                     </div>
-                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 text-center text-slate-500">
-                        <i class="fa-solid fa-users text-4xl mb-2 text-slate-300"></i>
-                        <p class="font-medium">Full database table view active.</p>
-                        <p class="text-xs text-slate-400">Filterable by zone, severity of need, and unserved status.</p>
-                    </div>
-                </section>
 
-                <!-- TAB 3: RELIEF INVENTORY -->
-                <section id="tab-inventory" class="space-y-6 hidden">
-                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex justify-between items-center">
-                        <div>
-                            <h3 class="text-lg font-bold text-slate-800">Donation & Relief Supply Ledger</h3>
-                            <p class="text-xs text-slate-500">Real-time tracking of stock levels, categories, and distribution records.</p>
+                    <!-- Stock Cards Grid -->
+                    <div id="inventory-cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+
+                    <!-- Recent Stock Movements Table -->
+                    <div class="bg-white rounded-2xl border border-slate-200/90 shadow-xs overflow-hidden">
+                        <div class="px-5 py-4 border-b border-slate-200/80 flex justify-between items-center">
+                            <h4 class="font-bold text-slate-900 text-sm">Recent Supply Movements</h4>
+                            <span class="text-xs text-slate-500">Auto-synced with family dispatches</span>
                         </div>
-                        <button class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">
-                            <i class="fa-solid fa-plus mr-1.5"></i> Log Inbound Donation
-                        </button>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div class="bg-white p-4 rounded-lg border border-slate-200">
-                            <h4 class="font-semibold text-slate-800 text-sm">Dry Goods & Food Packs</h4>
-                            <p class="text-2xl font-bold text-emerald-600 mt-2">540 units</p>
-                            <p class="text-xs text-slate-400 mt-1">Status: Adequate stock</p>
-                        </div>
-                        <div class="bg-white p-4 rounded-lg border border-slate-200">
-                            <h4 class="font-semibold text-slate-800 text-sm">Potable Water (Gallons)</h4>
-                            <p class="text-2xl font-bold text-amber-600 mt-2">120 units</p>
-                            <p class="text-xs text-slate-400 mt-1">Status: Low stock alert</p>
-                        </div>
-                        <div class="bg-white p-4 rounded-lg border border-slate-200">
-                            <h4 class="font-semibold text-slate-800 text-sm">Hygiene Kits</h4>
-                            <p class="text-2xl font-bold text-blue-600 mt-2">350 units</p>
-                            <p class="text-xs text-slate-400 mt-1">Status: Adequate stock</p>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead class="bg-slate-50 text-slate-500 text-[11px] uppercase tracking-wider border-b border-slate-200">
+                                    <tr>
+                                        <th class="px-5 py-3">Type</th>
+                                        <th class="px-5 py-3">Supply Item</th>
+                                        <th class="px-5 py-3">Quantity</th>
+                                        <th class="px-5 py-3">Source / Recipient</th>
+                                        <th class="px-5 py-3 text-right">Timestamp</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="inventory-transactions-tbody" class="divide-y divide-slate-100 text-sm"></tbody>
+                            </table>
                         </div>
                     </div>
                 </section>
 
-                <!-- TAB 4: VOLUNTEERS -->
-                <section id="tab-volunteers" class="space-y-6 hidden">
-                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex justify-between items-center">
+                <!-- ==================== TAB 4: VOLUNTEERS ==================== -->
+                <section id="tab-volunteers" class="space-y-5 hidden animate-view">
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                         <div>
-                            <h3 class="text-lg font-bold text-slate-800">Volunteer Management Matrix</h3>
-                            <p class="text-xs text-slate-500">Skills, ministry ties, availability tracking, and deployment assignments.</p>
+                            <h3 class="text-base font-bold text-slate-900">Volunteer Management Matrix</h3>
+                            <p class="text-xs text-slate-500">Coordinate church ministry responders, field assignments, and shift readiness.</p>
                         </div>
-                        <button class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">
-                            <i class="fa-solid fa-user-gear mr-1.5"></i> Add Volunteer
+                        <button onclick="openVolunteerModal()" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition shadow-xs flex items-center gap-2 shrink-0">
+                            <i class="fa-solid fa-user-plus"></i> Add Volunteer
                         </button>
                     </div>
-                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm text-center text-slate-500">
-                        <i class="fa-solid fa-user-shield text-4xl mb-2 text-slate-300"></i>
-                        <p class="font-medium">Volunteer Deployment Grid Ready</p>
+
+                    <!-- Filter Bar -->
+                    <div class="bg-white p-4 rounded-2xl border border-slate-200/90 shadow-xs flex flex-col sm:flex-row gap-3 justify-between">
+                        <div class="relative flex-1">
+                            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                            <input type="text" id="volunteer-search" oninput="renderVolunteers()" placeholder="Search volunteer name, skill, or assigned barangay..." class="w-full pl-10 pr-4 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-purple-500">
+                        </div>
+                        <select id="volunteer-status-filter" onchange="renderVolunteers()" class="text-sm bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-medium text-slate-700 focus:outline-none focus:border-purple-500">
+                            <option value="All">All Readiness States</option>
+                            <option value="Deployed">Deployed in Field</option>
+                            <option value="Standby">On Standby</option>
+                            <option value="Off-Duty">Off-Duty</option>
+                        </select>
                     </div>
+
+                    <!-- Volunteer Cards Grid -->
+                    <p id="volunteer-results-count" class="text-xs text-slate-500" aria-live="polite"></p>
+                    <div id="volunteers-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
                 </section>
 
-                <!-- TAB 5: SCHEDULE & CALENDAR -->
-                <section id="tab-schedule" class="space-y-6 hidden">
-                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex justify-between items-center">
+                <!-- ==================== TAB 5: SCHEDULE & CALENDAR ==================== -->
+                <section id="tab-schedule" class="space-y-5 hidden animate-view">
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                         <div>
-                            <h3 class="text-lg font-bold text-slate-800">Operational Calendar & Schedule Tracker</h3>
-                            <p class="text-xs text-slate-500">Coordinating 24-48 hr disaster response shifts, distributions, and pastoral visits.</p>
+                            <h3 class="text-base font-bold text-slate-900">Operational Calendar & Shift Tracker</h3>
+                            <p class="text-xs text-slate-500">Click any date in November 2026 to inspect scheduled relief drops or pastoral visits.</p>
                         </div>
-                        <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">
-                            <i class="fa-solid fa-calendar-plus mr-1.5"></i> Schedule Event
+                        <button onclick="openEventModal()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition shadow-xs flex items-center gap-2 shrink-0">
+                            <i class="fa-solid fa-calendar-plus"></i> Schedule Event
                         </button>
                     </div>
-                    <!-- Calendar Mock Grid -->
-                    <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
-                        <div class="flex justify-between items-center mb-4">
-                            <h4 class="font-bold text-slate-800 text-base">November 2026</h4>
-                            <div class="space-x-2">
-                                <button class="px-3 py-1 bg-slate-100 rounded text-xs font-semibold">Month</button>
-                                <button class="px-3 py-1 bg-blue-50 text-blue-600 rounded text-xs font-semibold">Week</button>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Calendar Grid -->
+                        <div class="lg:col-span-2 bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs">
+                            <div class="flex flex-wrap justify-between items-center gap-2 mb-4">
+                                <div class="flex items-center gap-2">
+                                    <h4 class="font-bold text-slate-900 text-base">November 2026</h4>
+                                    <span class="text-xs bg-blue-50 text-blue-700 font-semibold px-2.5 py-0.5 rounded-full">Today: Nov 19</span>
+                                </div>
+                                <div class="flex items-center gap-3 text-xs">
+                                    <span class="flex items-center gap-1.5 text-slate-600"><span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> Relief</span>
+                                    <span class="flex items-center gap-1.5 text-slate-600"><span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span> Pastoral</span>
+                                    <span class="flex items-center gap-1.5 text-slate-600"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Logistics</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-7 gap-1.5 text-center text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+                                <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+                            </div>
+                            <div id="calendar-days-grid" class="grid grid-cols-7 gap-1.5"></div>
+                        </div>
+
+                        <!-- Selected Day Agenda -->
+                        <div class="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                                    <div>
+                                        <p class="text-xs font-semibold text-slate-400 uppercase">Selected Date</p>
+                                        <h4 id="selected-date-label" class="font-bold text-slate-900 text-base mt-0.5">November 19, 2026</h4>
+                                    </div>
+                                    <button onclick="openEventModal(selectedCalendarDate)" class="text-xs bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold px-2.5 py-1.5 rounded-lg transition">
+                                        + Add
+                                    </button>
+                                </div>
+                                <div id="selected-day-events" class="mt-4 space-y-3"></div>
+                            </div>
+                            <div class="mt-6 pt-3 border-t border-slate-100 text-xs text-slate-500">
+                                All times in Philippine Standard Time (PST / UTC+8).
                             </div>
                         </div>
-                        <div class="grid grid-cols-7 gap-2 text-center text-xs font-semibold text-slate-400 mb-2">
-                            <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
-                        </div>
-                        <div class="grid grid-cols-7 gap-2">
-                            <div class="p-3 bg-slate-50 rounded-lg text-slate-400 text-sm">26</div>
-                            <div class="p-3 bg-slate-50 rounded-lg text-slate-400 text-sm">27</div>
-                            <div class="p-3 bg-slate-50 rounded-lg text-slate-400 text-sm">28</div>
-                            <div class="p-3 bg-slate-50 rounded-lg text-slate-400 text-sm">29</div>
-                            <div class="p-3 bg-slate-50 rounded-lg text-slate-400 text-sm">30</div>
-                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm font-bold">1</div>
-                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm font-bold">2</div>
-                            
-                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm">3
-                                <span class="block mt-1 bg-blue-100 text-blue-800 text-[10px] p-1 rounded font-normal">Relief Pack Deployment</span>
-                            </div>
-                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm">4</div>
-                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm">5
-                                <span class="block mt-1 bg-purple-100 text-purple-800 text-[10px] p-1 rounded font-normal">Pastoral Visit - Brgy Sto Niño</span>
-                            </div>
-                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm">6</div>
-                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm">7</div>
-                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm">8</div>
-                            <div class="p-3 bg-white border border-slate-200 rounded-lg text-sm">9</div>
-                        </div>
                     </div>
                 </section>
 
-                <!-- TAB 6: PASTORAL CARE -->
-                <section id="tab-pastoral" class="space-y-6 hidden">
-                    <div class="bg-amber-50 border border-amber-200 p-6 rounded-xl flex items-start space-x-4">
-                        <div class="bg-amber-500 text-white p-3 rounded-lg"><i class="fa-solid fa-shield-halved"></i></div>
-                        <div>
-                            <h3 class="font-bold text-amber-900">Restricted Access: Pastoral Care Module</h3>
-                            <p class="text-xs text-amber-800 mt-1">Pursuant to the Data Privacy Act of 2012, records concerning spiritual counseling, prayer requests, and personal pastoral visits are strictly restricted to authorized pastoral personnel.</p>
+                <!-- ==================== TAB 6: PASTORAL CARE ==================== -->
+                <section id="tab-pastoral" class="space-y-5 hidden animate-view">
+                    <!-- Privacy Notice Banner -->
+                    <div class="bg-amber-50/90 border border-amber-200 p-5 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start space-x-3.5">
+                            <div class="bg-amber-500 text-white p-3 rounded-xl shrink-0 shadow-xs">
+                                <i class="fa-solid fa-shield-halved text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-amber-950 text-sm">Restricted Access: Pastoral Care & Spiritual Counseling</h3>
+                                <p class="text-xs text-amber-900/80 mt-1 leading-relaxed">
+                                    Pursuant to the <strong>Data Privacy Act of 2012 (RA 10173)</strong>, spiritual counseling notes, trauma debriefings, and prayer requests are encrypted and restricted to ordained JCCF pastoral staff.
+                                </p>
+                            </div>
+                        </div>
+                        <div id="pastoral-auth-controls" class="shrink-0"></div>
+                    </div>
+
+                    <!-- Locked Gate Screen -->
+                    <div id="pastoral-locked-view" class="bg-white rounded-2xl border border-slate-200/90 shadow-xs p-8 sm:p-12 text-center max-w-lg mx-auto">
+                        <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl">
+                            <i class="fa-solid fa-user-lock"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-900">Pastoral Vault Locked</h4>
+                        <p class="text-xs text-slate-500 mt-1.5 max-w-sm mx-auto">Enter your authorized Pastoral PIN to view confidential prayer logs and schedule trauma care visits. <br><span class="text-slate-400">(Demo PIN: <strong class="text-slate-700">1234</strong>)</span></p>
+                        <form onsubmit="unlockPastoralVault(event)" class="mt-5 flex items-center justify-center gap-2 max-w-xs mx-auto">
+                            <input type="password" id="pastoral-pin-input" maxlength="6" placeholder="Enter PIN" class="w-full px-4 py-2.5 text-center tracking-widest font-bold text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:border-amber-500">
+                            <button type="submit" class="bg-amber-600 hover:bg-amber-700 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition shrink-0">
+                                Unlock
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Unlocked Pastoral Care Logs -->
+                    <div id="pastoral-unlocked-view" class="hidden space-y-5">
+                        <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-xs flex flex-wrap justify-between items-center gap-3">
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-base">Confidential Prayer & Counseling Logs</h4>
+                                <p class="text-xs text-slate-500">Active session verified • Auto-locks when session ends</p>
+                            </div>
+                            <button onclick="openPastoralModal()" class="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition flex items-center gap-2">
+                                <i class="fa-solid fa-plus"></i> Log Pastoral Care Note
+                            </button>
+                        </div>
+                        <div id="pastoral-logs-list" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                    </div>
+                </section>
+
+                <section id="community-portal" class="hidden space-y-6 animate-view">
+                    <div class="relative isolate overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-700 via-blue-600 to-cyan-500 p-6 sm:p-10 text-white shadow-xl shadow-blue-900/20">
+                        <div class="absolute -right-12 -top-16 -z-10 h-64 w-64 rounded-full bg-white/20 blur-3xl"></div>
+                        <div class="absolute -bottom-24 left-1/3 -z-10 h-56 w-56 rounded-full bg-violet-300/20 blur-3xl"></div>
+                        <div class="relative max-w-3xl">
+                            <span class="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-blue-50">
+                                <i class="fa-solid fa-heart"></i> JCCF Community Support
+                            </span>
+                            <h2 class="mt-5 text-3xl sm:text-4xl font-extrabold tracking-tight">Help is closer when we work together.</h2>
+                            <p class="mt-3 max-w-2xl text-sm sm:text-base leading-relaxed text-blue-50">Check the progress of a relief request or tell our response team what your household needs. We’re here to help you take the next step.</p>
+                            <button type="button" onclick="focusCommunityRequest()" class="mt-6 inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-bold text-blue-700 shadow-lg transition hover:-translate-y-0.5 hover:bg-blue-50">
+                                <i class="fa-solid fa-hand-holding-heart"></i> Request assistance
+                            </button>
                         </div>
                     </div>
-                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 space-y-4">
-                        <h4 class="font-bold text-slate-800">Recent Prayer & Counseling Logs</h4>
-                        <div class="border-l-4 border-amber-500 pl-4 py-2">
-                            <p class="text-sm font-medium text-slate-800">Prayer Request: Santos Family (Coping with disaster displacement)</p>
-                            <p class="text-xs text-slate-500 mt-0.5">Logged by Pastor John • Follow-up visit scheduled for Thursday</p>
-                        </div>
+
+                    <div class="grid grid-cols-1 gap-5 lg:grid-cols-2">
+                        <section class="rounded-2xl border border-slate-200/90 bg-white p-5 sm:p-6 shadow-xs">
+                            <div class="mb-5 flex items-start gap-3">
+                                <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-md shadow-blue-600/20">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-slate-900">Check a request</h3>
+                                    <p class="mt-1 text-xs leading-relaxed text-slate-500">Enter your case reference and household name to see the latest status.</p>
+                                </div>
+                            </div>
+                            <form onsubmit="lookupCommunityCase(event)" class="space-y-3">
+                                <div>
+                                    <label for="community-case-code" class="mb-1 block text-xs font-semibold text-slate-700">Case reference</label>
+                                    <input required id="community-case-code" autocomplete="off" placeholder="e.g. FAM-101" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-2.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20">
+                                </div>
+                                <div>
+                                    <label for="community-family-name" class="mb-1 block text-xs font-semibold text-slate-700">Household name</label>
+                                    <input required id="community-family-name" autocomplete="off" placeholder="e.g. Santos Family" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-2.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20">
+                                </div>
+                                <button type="submit" class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-blue-600/20 transition hover:brightness-110">
+                                    <i class="fa-solid fa-arrow-right"></i> View request status
+                                </button>
+                            </form>
+                            <p class="mt-3 text-[11px] text-slate-400">Demo example: FAM-101 · Santos Family</p>
+                            <p id="community-case-feedback" class="mt-3 hidden rounded-xl bg-rose-50 px-3 py-2 text-xs font-medium text-rose-700" role="status" aria-live="polite"></p>
+                            <div id="community-case-result" class="mt-4 hidden rounded-xl border border-blue-200 bg-blue-50/60 p-4" role="status" aria-live="polite">
+                                <div class="flex flex-wrap items-center justify-between gap-2">
+                                    <p class="text-xs font-semibold uppercase tracking-wide text-blue-900">Request status</p>
+                                    <span id="community-case-status" class="rounded-full px-2.5 py-1 text-xs font-bold"></span>
+                                </div>
+                                <p class="mt-3 text-sm font-semibold text-slate-800">Service area: <span id="community-case-area" class="font-normal"></span></p>
+                                <p class="mt-1 text-sm font-semibold text-slate-800">Reported needs: <span id="community-case-needs" class="font-normal"></span></p>
+                            </div>
+                        </section>
+
+                        <section id="community-request-card" class="rounded-2xl border border-slate-200/90 bg-white p-5 sm:p-6 shadow-xs">
+                            <div class="mb-5 flex items-start gap-3">
+                                <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-fuchsia-500 to-violet-600 text-white shadow-md shadow-violet-600/20">
+                                    <i class="fa-solid fa-house-medical"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-slate-900">Request household assistance</h3>
+                                    <p class="mt-1 text-xs leading-relaxed text-slate-500">Share the essentials so the response team can follow up.</p>
+                                </div>
+                            </div>
+                            <form onsubmit="submitCommunityRequest(event)" class="space-y-3">
+                                <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                                    <div>
+                                        <label for="community-request-name" class="mb-1 block text-xs font-semibold text-slate-700">Household name *</label>
+                                        <input required id="community-request-name" maxlength="80" placeholder="Family or household name" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-2.5 text-sm focus:border-violet-500 focus:outline-none">
+                                    </div>
+                                    <div>
+                                        <label for="community-request-contact" class="mb-1 block text-xs font-semibold text-slate-700">Contact person *</label>
+                                        <input required id="community-request-contact" maxlength="80" placeholder="Name of household contact" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-2.5 text-sm focus:border-violet-500 focus:outline-none">
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                                    <div>
+                                        <label for="community-request-size" class="mb-1 block text-xs font-semibold text-slate-700">People in household *</label>
+                                        <input required id="community-request-size" type="number" min="1" max="30" value="4" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-2.5 text-sm focus:border-violet-500 focus:outline-none">
+                                    </div>
+                                    <div>
+                                        <label for="community-request-area" class="mb-1 block text-xs font-semibold text-slate-700">Barangay *</label>
+                                        <input required id="community-request-area" maxlength="80" placeholder="Your barangay" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-2.5 text-sm focus:border-violet-500 focus:outline-none">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="community-request-needs" class="mb-1 block text-xs font-semibold text-slate-700">What support is needed? *</label>
+                                    <textarea required id="community-request-needs" maxlength="300" rows="2" placeholder="For example: food packs, drinking water, hygiene kits" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-2.5 text-sm focus:border-violet-500 focus:outline-none"></textarea>
+                                </div>
+                                <button type="submit" class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-fuchsia-600 to-violet-600 px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-violet-600/20 transition hover:brightness-110">
+                                    <i class="fa-solid fa-paper-plane"></i> Send assistance request
+                                </button>
+                            </form>
+                            <div id="community-request-success" class="mt-4 hidden rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-800" role="status" aria-live="polite"></div>
+                        </section>
+                    </div>
+
+                    <div class="flex items-start gap-3 rounded-2xl border border-amber-200 bg-amber-50/90 p-4 text-xs leading-relaxed text-amber-900">
+                        <i class="fa-solid fa-circle-info mt-0.5 shrink-0 text-amber-600"></i>
+                        <p><strong>Prototype notice:</strong> This portal stores demo information in this browser only. Role switching is for preview and is not authentication or access control. Do not enter real personal or confidential information.</p>
                     </div>
                 </section>
 
@@ -314,34 +715,1235 @@
         </div>
     </div>
 
-    <!-- JavaScript for Tab Switching -->
+    <!-- ==================== MODALS ==================== -->
+    <div id="modal-backdrop" onclick="closeModal()" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
+        <div id="modal-container" onclick="event.stopPropagation()" class="bg-white rounded-2xl border border-slate-200 shadow-2xl max-w-lg w-full overflow-hidden animate-view">
+            <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/70">
+                <h3 id="modal-title" class="font-bold text-slate-900 text-base">Modal Title</h3>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-slate-700 p-1 rounded-lg hover:bg-slate-200/60 transition">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div id="modal-body" class="p-6 max-h-[80vh] overflow-y-auto"></div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 space-y-2 pointer-events-none"></div>
+
+    <!-- ==================== APPLICATION LOGIC ==================== -->
     <script>
+        const STORAGE_KEY = 'kaf8_disaster_system_v2';
+        const THEME_STORAGE_KEY = 'kaf8_theme';
+
+        const defaultState = {
+            families: [
+                {
+                    id: 'FAM-101',
+                    name: 'Santos Family',
+                    head: 'Roberto Santos',
+                    members: 5,
+                    barangay: 'Brgy. Sto. Niño',
+                    evacSite: 'Sto. Niño Elem. School',
+                    needs: 'Food packs, Potable Water',
+                    vulnerabilities: ['Senior Citizen', 'Infants/Toddlers'],
+                    status: 'Pending',
+                    notes: 'House flooded up to 4ft; grandmother requires maintenance meds.',
+                    aidHistory: []
+                },
+                {
+                    id: 'FAM-102',
+                    name: 'Dela Cruz Household',
+                    head: 'Marites Dela Cruz',
+                    members: 4,
+                    barangay: 'Brgy. San Jose',
+                    evacSite: 'JCCF Covered Court',
+                    needs: 'Hygiene kits, Bedding, Food packs',
+                    vulnerabilities: ['Single Parent'],
+                    status: 'Ongoing',
+                    notes: 'Received initial hot meals; awaiting hygiene & sleeping mats.',
+                    aidHistory: ['1x Dry Goods & Food Packs (Nov 18)']
+                },
+                {
+                    id: 'FAM-103',
+                    name: 'Bautista Family',
+                    head: 'Eduardo Bautista',
+                    members: 6,
+                    barangay: 'Brgy. Maligaya',
+                    evacSite: 'Home-based (Damaged Roof)',
+                    needs: 'Shelter tarps, Food packs',
+                    vulnerabilities: ['PWD Member'],
+                    status: 'Completed',
+                    notes: 'Emergency tarp installed by Logistics Team B.',
+                    aidHistory: ['2x Dry Goods & Food Packs (Nov 17)', '1x Emergency Shelter Tarp (Nov 18)']
+                },
+                {
+                    id: 'FAM-104',
+                    name: 'Reyes-Mendoza Family',
+                    head: 'Clarissa Reyes',
+                    members: 7,
+                    barangay: 'Brgy. Sto. Niño',
+                    evacSite: 'Sto. Niño Barangay Hall',
+                    needs: 'Potable Water, Infant Care, Food packs',
+                    vulnerabilities: ['Infants/Toddlers', 'Pregnant Mother'],
+                    status: 'Pending',
+                    notes: '8-month-old infant needs clean drinking water and diapers.',
+                    aidHistory: []
+                },
+                {
+                    id: 'FAM-105',
+                    name: 'Villanueva Household',
+                    head: 'Danilo Villanueva',
+                    members: 3,
+                    barangay: 'Brgy. Bagong Silang',
+                    evacSite: 'Bagong Silang Chapel',
+                    needs: 'Hygiene kits, Potable Water',
+                    vulnerabilities: ['Senior Citizen'],
+                    status: 'Ongoing',
+                    notes: 'Scheduled for pastoral wellness check.',
+                    aidHistory: ['1x Potable Water (5 Gal) (Nov 18)']
+                }
+            ],
+            inventory: [
+                { id: 'INV-01', name: 'Dry Goods & Food Packs', category: 'Food & Nutrition', current: 540, capacity: 800, minThreshold: 150, unit: 'packs' },
+                { id: 'INV-02', name: 'Potable Water (5 Gal)', category: 'Water & Sanitation', current: 95, capacity: 400, minThreshold: 120, unit: 'gallons' },
+                { id: 'INV-03', name: 'Family Hygiene Kits', category: 'Health & Hygiene', current: 350, capacity: 500, minThreshold: 100, unit: 'kits' },
+                { id: 'INV-04', name: 'Emergency Shelter Tarps', category: 'Shelter & Bedding', current: 42, capacity: 150, minThreshold: 50, unit: 'rolls' },
+                { id: 'INV-05', name: 'Infant & Senior Care Kits', category: 'Specialized Care', current: 110, capacity: 200, minThreshold: 40, unit: 'kits' },
+                { id: 'INV-06', name: 'First Aid & OTC Med Packs', category: 'Medical', current: 103, capacity: 150, minThreshold: 30, unit: 'boxes' }
+            ],
+            transactions: [
+                { id: 'TRX-01', type: 'Inbound', item: 'Dry Goods & Food Packs', qty: 200, party: 'JCCF Youth & Couples Ministry Drive', date: 'Nov 19, 2:15 PM' },
+                { id: 'TRX-02', type: 'Outbound', item: 'Emergency Shelter Tarps', qty: 1, party: 'Bautista Family (Brgy. Maligaya)', date: 'Nov 18, 4:40 PM' },
+                { id: 'TRX-03', type: 'Outbound', item: 'Dry Goods & Food Packs', qty: 1, party: 'Dela Cruz Household (Brgy. San Jose)', date: 'Nov 18, 1:10 PM' }
+            ],
+            volunteers: [
+                { id: 'VOL-01', name: 'Bro. Miguel Navarro', role: 'Logistics & Van Driver', ministry: 'Men’s Fellowship', phone: '0917-555-0142', status: 'Deployed', assignment: 'Brgy. Sto. Niño Relief Drop' },
+                { id: 'VOL-02', name: 'Sis. Angela Soriano, RN', role: 'Medical Triage & First Aid', ministry: 'Health & Care Team', phone: '0918-555-0198', status: 'Deployed', assignment: 'JCCF Covered Court Clinic' },
+                { id: 'VOL-03', name: 'Ptr. Jonathan Reyes', role: 'Pastoral Counseling Lead', ministry: 'Pastoral Board', phone: '0917-555-0111', status: 'Deployed', assignment: 'Brgy. Sto. Niño Home Visits' },
+                { id: 'VOL-04', name: 'Sis. Camille Tolentino', role: 'Inventory & Pack Assembly', ministry: 'Young Adults', phone: '0920-555-0174', status: 'Standby', assignment: 'Main Church Warehouse' },
+                { id: 'VOL-05', name: 'Bro. Gabriel Aquino', role: 'Field Assessment & Intake', ministry: 'Missions & Outreach', phone: '0919-555-0163', status: 'Deployed', assignment: 'Brgy. San Jose Mapping' },
+                { id: 'VOL-06', name: 'Sis. Beatrice Lim', role: 'Community Kitchen Lead', ministry: 'Hospitality Ministry', phone: '0917-555-0189', status: 'Off-Duty', assignment: 'Next Shift: Nov 20, 6:00 AM' }
+            ],
+            events: [
+                { id: 'EVT-01', date: '2026-11-03', title: 'Initial Relief Pack Repacking', type: 'Logistics', time: '08:00 AM - 12:00 PM', location: 'JCCF Fellowship Hall' },
+                { id: 'EVT-02', date: '2026-11-05', title: 'Pastoral Visitation - Brgy. Sto. Niño', type: 'Pastoral', time: '02:00 PM - 05:00 PM', location: 'Brgy. Sto. Niño Zone 2' },
+                { id: 'EVT-03', date: '2026-11-19', title: 'Emergency Water & Food Dispatch', type: 'Relief', time: '06:00 PM - 08:30 PM', location: 'Sto. Niño Elem. School' },
+                { id: 'EVT-04', date: '2026-11-19', title: 'Evening Trauma Debrief & Prayer', type: 'Pastoral', time: '07:30 PM - 09:00 PM', location: 'JCCF Prayer Room' },
+                { id: 'EVT-05', date: '2026-11-21', title: 'Weekend Medical & Hygiene Mission', type: 'Relief', time: '07:00 AM - 03:00 PM', location: 'Brgy. San Jose Covered Court' },
+                { id: 'EVT-06', date: '2026-11-24', title: 'Warehouse Restock & Audit', type: 'Logistics', time: '09:00 AM - 12:00 PM', location: 'Main Church Storage' }
+            ],
+            pastoralLogs: [
+                { id: 'PAS-01', family: 'Santos Family', category: 'Home Visit & Prayer', summary: 'Family experiencing high anxiety after losing ground-floor appliances. Prayed together and arranged trauma care follow-up.', pastor: 'Ptr. Jonathan Reyes', followUp: 'Nov 20, 2026', resolved: false },
+                { id: 'PAS-02', family: 'Dela Cruz Household', category: 'Spiritual Counseling', summary: 'Single mother comforted at JCCF Covered Court; connected with Women’s Care small group leader.', pastor: 'Ptra. Grace Mendoza', followUp: 'Nov 22, 2026', resolved: false },
+                { id: 'PAS-03', family: 'Bautista Family', category: 'Thanksgiving & Follow-up', summary: 'Praised God for safe evacuation of PWD family member; roof tarpaulin secured.', pastor: 'Ptr. Jonathan Reyes', followUp: 'Completed', resolved: true }
+            ],
+            pastoralUnlocked: false
+        };
+
+        let state = loadState();
+        let selectedCalendarDate = '2026-11-19';
+        let activeRole = 'admin';
+        let activeTab = 'dashboard';
+
+        function loadState() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    return { ...defaultState, ...parsed, pastoralUnlocked: false };
+                }
+            } catch (e) { console.error(e); }
+            return JSON.parse(JSON.stringify(defaultState));
+        }
+
+        function saveState() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+            } catch (e) { console.error(e); }
+            refreshAllViews();
+        }
+
+        function applyTheme(theme) {
+            const isDark = theme === 'dark';
+            document.body.classList.toggle('theme-dark', isDark);
+            const toggle = document.getElementById('theme-toggle');
+            const icon = document.getElementById('theme-toggle-icon');
+            const label = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+            toggle.setAttribute('aria-label', label);
+            toggle.setAttribute('title', label);
+            toggle.setAttribute('aria-pressed', String(isDark));
+            icon.className = `fa-solid ${isDark ? 'fa-sun' : 'fa-moon'}`;
+        }
+
+        function toggleTheme() {
+            const theme = document.body.classList.contains('theme-dark') ? 'light' : 'dark';
+            applyTheme(theme);
+            try {
+                localStorage.setItem(THEME_STORAGE_KEY, theme);
+            } catch (e) {
+                console.error('Unable to save theme preference:', e);
+            }
+        }
+
+        function initializeTheme() {
+            let savedTheme = null;
+            try {
+                savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+            } catch (e) {
+                console.error('Unable to read theme preference:', e);
+            }
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            applyTheme(savedTheme === 'dark' || savedTheme === 'light' ? savedTheme : prefersDark ? 'dark' : 'light');
+        }
+
+        function switchRole(role) {
+            activeRole = role === 'community' ? 'community' : 'admin';
+            const isCommunity = activeRole === 'community';
+            const toggle = document.getElementById('role-toggle');
+            const icon = document.getElementById('role-toggle-icon');
+            const label = document.getElementById('role-toggle-label');
+            const nextRole = isCommunity ? 'Admin Console' : 'Community Portal';
+
+            document.getElementById('sidebar').classList.toggle('hidden', isCommunity);
+            if (isCommunity) {
+                ['dashboard', 'families', 'inventory', 'volunteers', 'schedule', 'pastoral'].forEach(tab =>
+                    document.getElementById(`tab-${tab}`).classList.add('hidden')
+                );
+            }
+            document.getElementById('community-portal').classList.toggle('hidden', !isCommunity);
+            document.getElementById('admin-header-actions').classList.toggle('hidden', isCommunity);
+            document.getElementById('mobile-sidebar-toggle').classList.toggle('hidden', isCommunity);
+            toggle.setAttribute('aria-label', `Switch to ${nextRole}`);
+            toggle.setAttribute('aria-pressed', String(isCommunity));
+            label.textContent = nextRole;
+            icon.className = `fa-solid ${isCommunity ? 'fa-gauge-high' : 'fa-house-user'}`;
+
+            if (isCommunity) {
+                document.getElementById('page-title').textContent = 'Community Assistance Portal';
+                document.getElementById('page-subtitle').textContent = 'Request support and check your household’s relief status';
+                toggleMobileSidebar(false);
+            } else {
+                switchTab(activeTab);
+            }
+        }
+
+        function focusCommunityRequest() {
+            document.getElementById('community-request-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            document.getElementById('community-request-name').focus({ preventScroll: true });
+        }
+
+        function lookupCommunityCase(event) {
+            event.preventDefault();
+            const caseId = document.getElementById('community-case-code').value.trim().toLowerCase();
+            const familyName = document.getElementById('community-family-name').value.trim().toLowerCase();
+            const family = state.families.find(item =>
+                item.id.toLowerCase() === caseId && item.name.trim().toLowerCase() === familyName
+            );
+            const feedback = document.getElementById('community-case-feedback');
+            const result = document.getElementById('community-case-result');
+
+            if (!family) {
+                result.classList.add('hidden');
+                feedback.textContent = 'We couldn’t find a request matching those details. Check the case reference and household name, or submit a new request.';
+                feedback.classList.remove('hidden');
+                return;
+            }
+
+            feedback.classList.add('hidden');
+            document.getElementById('community-case-status').textContent = family.status;
+            document.getElementById('community-case-status').className = `rounded-full px-2.5 py-1 text-xs font-bold ${
+                family.status === 'Completed' ? 'bg-emerald-100 text-emerald-800' :
+                family.status === 'Ongoing' ? 'bg-blue-100 text-blue-800' :
+                'bg-amber-100 text-amber-800'
+            }`;
+            document.getElementById('community-case-area').textContent = family.barangay;
+            document.getElementById('community-case-needs').textContent = family.needs;
+            result.classList.remove('hidden');
+        }
+
+        function submitCommunityRequest(event) {
+            event.preventDefault();
+            const name = document.getElementById('community-request-name').value.trim();
+            const head = document.getElementById('community-request-contact').value.trim();
+            const members = Number.parseInt(document.getElementById('community-request-size').value, 10);
+            const barangay = document.getElementById('community-request-area').value.trim();
+            const needs = document.getElementById('community-request-needs').value.trim();
+
+            if (!name || !head || !barangay || !needs || !Number.isInteger(members) || members < 1 || members > 30) {
+                showToast('Complete each required field with a valid household size.', 'error');
+                return;
+            }
+
+            const family = {
+                id: `FAM-${Date.now()}`,
+                name,
+                head,
+                members,
+                barangay,
+                evacSite: 'Community shelter requested',
+                needs,
+                vulnerabilities: [],
+                status: 'Pending',
+                notes: 'Submitted through the community portal.',
+                aidHistory: []
+            };
+            state.families.unshift(family);
+            saveState();
+            document.getElementById('community-request-success').textContent =
+                `Your request has been received. Your case reference is ${family.id}. Keep it with the household name to check updates.`;
+            document.getElementById('community-request-success').classList.remove('hidden');
+            event.currentTarget.reset();
+            showToast('Assistance request received.', 'success');
+        }
+
+        function resetDemoData() {
+            if (confirm('Reset all Kaf8 operational records back to default demo data?')) {
+                localStorage.removeItem(STORAGE_KEY);
+                state = JSON.parse(JSON.stringify(defaultState));
+                refreshAllViews();
+                showToast('Demo operational data restored.', 'info');
+            }
+        }
+
+        // ==================== NAVIGATION & RESPONSIVE SIDEBAR ====================
+        function toggleMobileSidebar(open) {
+            const sidebar = document.getElementById('sidebar');
+            const backdrop = document.getElementById('mobile-backdrop');
+            if (open) {
+                sidebar.classList.remove('-translate-x-full');
+                backdrop.classList.remove('hidden');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                backdrop.classList.add('hidden');
+            }
+        }
+
         function switchTab(tabId) {
+            activeTab = tabId;
             const tabs = ['dashboard', 'families', 'inventory', 'volunteers', 'schedule', 'pastoral'];
-            
             tabs.forEach(t => {
                 const section = document.getElementById(`tab-${t}`);
                 const navBtn = document.getElementById(`nav-${t}`);
-                
                 if (t === tabId) {
                     section.classList.remove('hidden');
-                    navBtn.className = "w-full flex items-center space-x-3 px-4 py-2.5 rounded-lg text-sm font-medium bg-blue-600 text-white transition-colors";
+                    section.classList.remove('animate-view');
+                    void section.offsetWidth;
+                    section.classList.add('animate-view');
+                    navBtn.className = "nav-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold bg-blue-600 text-white shadow-md shadow-blue-600/25 transition-all";
+                    navBtn.setAttribute('aria-current', 'page');
                 } else {
                     section.classList.add('hidden');
-                    navBtn.className = "w-full flex items-center space-x-3 px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-800 hover:text-white transition-colors text-slate-300";
+                    navBtn.className = "nav-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-900 hover:text-white transition-all";
+                    navBtn.removeAttribute('aria-current');
                 }
             });
 
-            const titles = {
-                'dashboard': 'Command Dashboard',
-                'families': 'Affected Family Management',
-                'inventory': 'Donation & Relief Supply Ledger',
-                'volunteers': 'Volunteer Management Matrix',
-                'schedule': 'Operational Calendar & Schedule Tracker',
-                'pastoral': 'Pastoral Care & Spiritual Support Logs'
+            const meta = {
+                dashboard: ['Command Dashboard', 'Real-time relief coordination & community care overview'],
+                families: ['Affected Family Management', 'Household intake profiles, vulnerability tags & aid history'],
+                inventory: ['Donation & Relief Supply Ledger', 'Warehouse stock levels, low-stock alerts & distribution logs'],
+                volunteers: ['Volunteer Management Matrix', 'Ministry responder readiness, skills & field deployment'],
+                schedule: ['Operational Calendar & Schedule', 'Coordinating relief drops, shifts & pastoral care visits'],
+                pastoral: ['Pastoral Care & Spiritual Support', 'Encrypted spiritual counseling & prayer request portal']
             };
-            document.getElementById('page-title').innerText = titles[tabId];
+            document.getElementById('page-title').innerText = meta[tabId][0];
+            document.getElementById('page-subtitle').innerText = meta[tabId][1];
+            toggleMobileSidebar(false);
         }
+
+        // ==================== RENDERING ENGINE ====================
+        function refreshAllViews() {
+            renderDashboard();
+            renderFamilies();
+            renderInventory();
+            renderVolunteers();
+            renderCalendar();
+            renderPastoral();
+        }
+
+        function getStatusBadge(status) {
+            const styles = {
+                'Pending': 'bg-amber-50 text-amber-700 border-amber-200 ring-amber-500/10',
+                'Ongoing': 'bg-blue-50 text-blue-700 border-blue-200 ring-blue-500/10',
+                'Completed': 'bg-emerald-50 text-emerald-700 border-emerald-200 ring-emerald-500/10'
+            };
+            const dots = {
+                'Pending': 'bg-amber-500',
+                'Ongoing': 'bg-blue-500',
+                'Completed': 'bg-emerald-500'
+            };
+            return `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border ${styles[status] || styles.Pending}">
+                <span class="w-1.5 h-1.5 rounded-full ${dots[status] || dots.Pending}"></span>${status}
+            </span>`;
+        }
+
+        function renderDashboard() {
+            const totalFamilies = state.families.length;
+            const pendingCount = state.families.filter(f => f.status === 'Pending').length;
+            const totalStock = state.inventory.reduce((sum, item) => sum + item.current, 0);
+            const lowStockItems = state.inventory.filter(item => item.current <= item.minThreshold);
+            const deployedVols = state.volunteers.filter(v => v.status === 'Deployed').length;
+            const standbyVols = state.volunteers.filter(v => v.status === 'Standby').length;
+            const activePastoral = state.pastoralLogs.filter(p => !p.resolved).length;
+
+            document.getElementById('stat-total-families').innerText = totalFamilies;
+            document.getElementById('stat-pending-families').innerText = `${pendingCount} Pending initial aid`;
+            document.getElementById('badge-pending-families').innerText = pendingCount;
+
+            document.getElementById('stat-total-stock').innerText = totalStock.toLocaleString();
+            const stockAlertEl = document.getElementById('stat-stock-alerts');
+            const badgeLow = document.getElementById('badge-low-stock');
+            if (lowStockItems.length > 0) {
+                stockAlertEl.innerHTML = `<span class="text-rose-600"><i class="fa-solid fa-triangle-exclamation mr-1"></i>${lowStockItems.length} item(s) low stock</span>`;
+                badgeLow.classList.remove('hidden');
+                badgeLow.innerText = lowStockItems.length;
+            } else {
+                stockAlertEl.innerText = 'All levels adequate';
+                badgeLow.classList.add('hidden');
+            }
+
+            document.getElementById('stat-deployed-volunteers').innerText = deployedVols;
+            document.getElementById('stat-standby-volunteers').innerText = `${standbyVols} on standby`;
+
+            document.getElementById('stat-pastoral-cases').innerText = state.pastoralLogs.length;
+            document.getElementById('stat-pastoral-visits').innerText = `${activePastoral} active follow-ups`;
+
+            // Barangay Coverage Bars
+            const byBarangay = {};
+            state.families.forEach(f => {
+                if (!byBarangay[f.barangay]) byBarangay[f.barangay] = { total: 0, served: 0 };
+                byBarangay[f.barangay].total++;
+                if (f.status === 'Completed' || f.status === 'Ongoing') byBarangay[f.barangay].served++;
+            });
+
+            const brgyContainer = document.getElementById('barangay-progress-list');
+            brgyContainer.innerHTML = Object.entries(byBarangay).map(([brgy, data]) => {
+                const pct = Math.round((data.served / data.total) * 100);
+                const barColor = pct === 100 ? 'bg-emerald-500' : pct >= 50 ? 'bg-blue-600' : 'bg-amber-500';
+                return `
+                    <div>
+                        <div class="flex justify-between text-xs font-semibold mb-1.5">
+                            <span class="text-slate-700">${brgy}</span>
+                            <span class="text-slate-500 tabular-nums">${data.served}/${data.total} reached (${pct}%)</span>
+                        </div>
+                        <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                            <div class="${barColor} h-full rounded-full transition-all duration-500" style="width: ${pct}%"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Priority Queue Table (Pending first)
+            const sortedFamilies = [...state.families].sort((a, b) => {
+                const order = { 'Pending': 0, 'Ongoing': 1, 'Completed': 2 };
+                return order[a.status] - order[b.status];
+            });
+
+            document.getElementById('dashboard-families-tbody').innerHTML = sortedFamilies.slice(0, 5).map(f => `
+                <tr class="hover:bg-slate-50/80 transition">
+                    <td class="px-5 py-3.5">
+                        <p class="font-semibold text-slate-900">${f.name}</p>
+                        <p class="text-xs text-slate-400">${f.members} members • ${f.evacSite}</p>
+                    </td>
+                    <td class="px-5 py-3.5 text-slate-600 font-medium">${f.barangay}</td>
+                    <td class="px-5 py-3.5 text-slate-600 text-xs">${f.needs}</td>
+                    <td class="px-5 py-3.5">${getStatusBadge(f.status)}</td>
+                    <td class="px-5 py-3.5 text-right">
+                        <button onclick="openManageFamilyModal('${f.id}')" class="text-xs font-semibold bg-blue-50 hover:bg-blue-600 text-blue-600 hover:text-white px-3 py-1.5 rounded-lg transition">
+                            Manage
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function renderFamilies() {
+            const search = (document.getElementById('family-search')?.value || '').toLowerCase();
+            const statusFilter = document.getElementById('family-status-filter')?.value || 'All';
+            const brgyFilterEl = document.getElementById('family-barangay-filter');
+            const currentBrgy = brgyFilterEl?.value || 'All';
+
+            // Populate barangay dropdown dynamically
+            if (brgyFilterEl) {
+                const barangays = ['All', ...new Set(state.families.map(f => f.barangay))];
+                brgyFilterEl.innerHTML = barangays.map(b => `<option value="${b}" ${b === currentBrgy ? 'selected' : ''}>${b === 'All' ? 'All Barangays' : b}</option>`).join('');
+            }
+
+            const filtered = state.families.filter(f => {
+                const matchesSearch = f.name.toLowerCase().includes(search) ||
+                    f.barangay.toLowerCase().includes(search) ||
+                    f.needs.toLowerCase().includes(search) ||
+                    f.vulnerabilities.some(v => v.toLowerCase().includes(search));
+                const matchesStatus = statusFilter === 'All' || f.status === statusFilter;
+                const matchesBrgy = currentBrgy === 'All' || f.barangay === currentBrgy;
+                return matchesSearch && matchesStatus && matchesBrgy;
+            });
+
+            const tbody = document.getElementById('families-full-tbody');
+            document.getElementById('family-results-count').innerText = `Showing ${filtered.length} of ${state.families.length} households`;
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-slate-400 text-sm">No matching household records found.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = filtered.map(f => `
+                <tr class="hover:bg-slate-50/80 transition">
+                    <td class="px-5 py-4">
+                        <div class="font-bold text-slate-900">${f.name}</div>
+                        <div class="text-xs text-slate-500">Head: ${f.head} • <span class="font-semibold text-slate-700">${f.members} pax</span></div>
+                    </td>
+                    <td class="px-5 py-4">
+                        <div class="font-medium text-slate-800">${f.barangay}</div>
+                        <div class="text-xs text-slate-400">${f.evacSite}</div>
+                    </td>
+                    <td class="px-5 py-4">
+                        <div class="flex flex-wrap gap-1">
+                            ${f.vulnerabilities.length ? f.vulnerabilities.map(v => `<span class="px-2 py-0.5 rounded-md text-[11px] font-semibold bg-rose-50 text-rose-700 border border-rose-200/70">${v}</span>`).join('') : '<span class="text-xs text-slate-400">None flagged</span>'}
+                        </div>
+                    </td>
+                    <td class="px-5 py-4 text-xs text-slate-600 max-w-xs">${f.needs}</td>
+                    <td class="px-5 py-4">${getStatusBadge(f.status)}</td>
+                    <td class="px-5 py-4 text-right">
+                        <button onclick="openManageFamilyModal('${f.id}')" class="text-xs font-semibold bg-slate-100 hover:bg-blue-600 text-slate-700 hover:text-white px-3 py-1.5 rounded-lg transition">
+                            Manage Case
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function renderInventory() {
+            const grid = document.getElementById('inventory-cards-grid');
+            grid.innerHTML = state.inventory.map(item => {
+                const pct = Math.min(100, Math.round((item.current / item.capacity) * 100));
+                const isLow = item.current <= item.minThreshold;
+                const barColor = isLow ? 'bg-rose-500' : pct < 50 ? 'bg-amber-500' : 'bg-emerald-500';
+                const badge = isLow
+                    ? `<span class="px-2 py-0.5 rounded-full text-[11px] font-bold bg-rose-50 text-rose-700 border border-rose-200"><i class="fa-solid fa-triangle-exclamation mr-1"></i>Low Stock</span>`
+                    : `<span class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">Adequate</span>`;
+
+                return `
+                    <div class="bg-white p-5 rounded-2xl border ${isLow ? 'border-rose-200 ring-2 ring-rose-500/10' : 'border-slate-200/90'} shadow-xs flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-start justify-between gap-2">
+                                <div>
+                                    <span class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">${item.category}</span>
+                                    <h4 class="font-bold text-slate-900 text-sm mt-0.5">${item.name}</h4>
+                                </div>
+                                ${badge}
+                            </div>
+                            <div class="mt-4 flex items-baseline justify-between">
+                                <p class="text-2xl font-extrabold ${isLow ? 'text-rose-600' : 'text-slate-900'} tabular-nums">
+                                    ${item.current} <span class="text-xs font-medium text-slate-400">/ ${item.capacity} ${item.unit}</span>
+                                </p>
+                                <span class="text-xs font-bold text-slate-500 tabular-nums">${pct}%</span>
+                            </div>
+                            <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden mt-2">
+                                <div class="${barColor} h-full rounded-full transition-all duration-300" style="width: ${pct}%"></div>
+                            </div>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                            <span class="text-slate-400">Min alert: ${item.minThreshold} ${item.unit}</span>
+                            <div class="flex items-center gap-1.5">
+                                <button onclick="adjustStockQuick('${item.id}', -10)" class="px-2 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold transition" title="Dispatch 10">-10</button>
+                                <button onclick="adjustStockQuick('${item.id}', 25)" class="px-2 py-1 rounded-md bg-emerald-50 hover:bg-emerald-600 text-emerald-700 hover:text-white font-bold transition" title="Restock 25">+25</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('inventory-transactions-tbody').innerHTML = state.transactions.map(t => `
+                <tr class="hover:bg-slate-50/70">
+                    <td class="px-5 py-3">
+                        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold ${t.type === 'Inbound' ? 'bg-emerald-50 text-emerald-700' : 'bg-blue-50 text-blue-700'}">
+                            <i class="fa-solid ${t.type === 'Inbound' ? 'fa-arrow-down' : 'fa-arrow-up'} text-[10px]"></i> ${t.type}
+                        </span>
+                    </td>
+                    <td class="px-5 py-3 font-semibold text-slate-800">${t.item}</td>
+                    <td class="px-5 py-3 font-bold tabular-nums ${t.type === 'Inbound' ? 'text-emerald-600' : 'text-slate-700'}">${t.type === 'Inbound' ? '+' : '-'}${t.qty}</td>
+                    <td class="px-5 py-3 text-slate-600 text-xs">${t.party}</td>
+                    <td class="px-5 py-3 text-right text-xs text-slate-400">${t.date}</td>
+                </tr>
+            `).join('');
+        }
+
+        function renderVolunteers() {
+            const search = (document.getElementById('volunteer-search')?.value || '').toLowerCase();
+            const statusFilter = document.getElementById('volunteer-status-filter')?.value || 'All';
+
+            const filtered = state.volunteers.filter(v => {
+                const matchText = v.name.toLowerCase().includes(search) || v.role.toLowerCase().includes(search) || v.assignment.toLowerCase().includes(search);
+                const matchStatus = statusFilter === 'All' || v.status === statusFilter;
+                return matchText && matchStatus;
+            });
+
+            const statusColors = {
+                'Deployed': 'bg-purple-50 text-purple-700 border-purple-200',
+                'Standby': 'bg-emerald-50 text-emerald-700 border-emerald-200',
+                'Off-Duty': 'bg-slate-100 text-slate-600 border-slate-200'
+            };
+
+            const grid = document.getElementById('volunteers-grid');
+            document.getElementById('volunteer-results-count').innerText = `Showing ${filtered.length} of ${state.volunteers.length} volunteers`;
+            if (filtered.length === 0) {
+                grid.innerHTML = '<div class="col-span-full rounded-2xl border border-dashed border-slate-300 p-8 text-center text-sm text-slate-500">No matching volunteers found.</div>';
+                return;
+            }
+
+            grid.innerHTML = filtered.map(v => `
+                <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-xs flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-start justify-between gap-2">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 font-bold text-sm flex items-center justify-center shrink-0">
+                                    ${v.name.replace(/^(Bro\.|Sis\.|Ptr\.|Ptra\.)\s*/i, '').slice(0, 2).toUpperCase()}
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-900 text-sm">${v.name}</h4>
+                                    <p class="text-xs text-slate-500">${v.ministry}</p>
+                                </div>
+                            </div>
+                            <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold border ${statusColors[v.status]}">${v.status}</span>
+                        </div>
+                        <div class="mt-4 space-y-1.5 text-xs">
+                            <p class="text-slate-700"><i class="fa-solid fa-briefcase-medical w-4 text-slate-400"></i> <strong>Skill:</strong> ${v.role}</p>
+                            <p class="text-slate-700"><i class="fa-solid fa-location-dot w-4 text-slate-400"></i> <strong>Assignment:</strong> ${v.assignment}</p>
+                            <p class="text-slate-500"><i class="fa-solid fa-phone w-4 text-slate-400"></i> ${v.phone}</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-[11px] text-slate-400">Cycle status:</span>
+                        <button onclick="cycleVolunteerStatus('${v.id}')" class="text-xs font-semibold text-purple-600 hover:bg-purple-50 px-2.5 py-1 rounded-lg transition">
+                            Switch Status ↻
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderCalendar() {
+            const grid = document.getElementById('calendar-days-grid');
+            // November 2026 starts on Sunday (Nov 1 = Sun). In Mon-Sun grid, Oct 26-31 precede Nov 1.
+            const leadingDays = [26, 27, 28, 29, 30, 31];
+            let html = leadingDays.map(d => `
+                <div class="min-h-[82px] p-2 bg-slate-50/70 rounded-xl text-slate-300 text-xs font-medium">${d}</div>
+            `).join('');
+
+            const typePill = {
+                'Relief': 'bg-blue-100 text-blue-800',
+                'Pastoral': 'bg-purple-100 text-purple-800',
+                'Logistics': 'bg-emerald-100 text-emerald-800'
+            };
+
+            for (let day = 1; day <= 30; day++) {
+                const dateStr = `2026-11-${String(day).padStart(2, '0')}`;
+                const dayEvents = state.events.filter(e => e.date === dateStr);
+                const isToday = dateStr === '2026-11-19';
+                const isSelected = dateStr === selectedCalendarDate;
+
+                html += `
+                    <div onclick="selectCalendarDate('${dateStr}')" class="cursor-pointer min-h-[82px] p-2 rounded-xl border transition-all flex flex-col justify-between ${
+                        isSelected ? 'bg-blue-50/60 border-blue-500 ring-2 ring-blue-500/20' :
+                        isToday ? 'bg-white border-blue-300' : 'bg-white border-slate-200/80 hover:border-slate-300'
+                    }">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold ${isToday ? 'bg-blue-600 text-white w-5 h-5 rounded-full flex items-center justify-center' : 'text-slate-700'}">${day}</span>
+                            ${dayEvents.length ? `<span class="text-[10px] font-bold text-slate-400">${dayEvents.length}</span>` : ''}
+                        </div>
+                        <div class="space-y-1 mt-1">
+                            ${dayEvents.slice(0, 2).map(ev => `
+                                <div class="${typePill[ev.type] || 'bg-slate-100 text-slate-700'} text-[10px] px-1.5 py-0.5 rounded font-medium truncate">${ev.title}</div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+            grid.innerHTML = html;
+
+            // Render Selected Day Panel
+            const dateObj = new Date(selectedCalendarDate + 'T00:00:00');
+            document.getElementById('selected-date-label').innerText = dateObj.toLocaleDateString('en-US', { weekday: 'short', month: 'long', day: 'numeric', year: 'numeric' });
+
+            const eventsForDay = state.events.filter(e => e.date === selectedCalendarDate);
+            const agendaEl = document.getElementById('selected-day-events');
+            if (eventsForDay.length === 0) {
+                agendaEl.innerHTML = `<div class="p-6 text-center bg-slate-50 rounded-xl border border-dashed border-slate-200 text-xs text-slate-400">No operations scheduled for this date.</div>`;
+            } else {
+                agendaEl.innerHTML = eventsForDay.map(ev => `
+                    <div class="p-3.5 rounded-xl border border-slate-200/90 bg-slate-50/60 space-y-1">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded ${typePill[ev.type] || 'bg-slate-200'}">${ev.type}</span>
+                            <span class="text-[11px] text-slate-500 font-medium">${ev.time}</span>
+                        </div>
+                        <h5 class="font-bold text-slate-900 text-sm pt-1">${ev.title}</h5>
+                        <p class="text-xs text-slate-500"><i class="fa-solid fa-location-dot mr-1 text-slate-400"></i>${ev.location}</p>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function selectCalendarDate(dateStr) {
+            selectedCalendarDate = dateStr;
+            renderCalendar();
+        }
+
+        function renderPastoral() {
+            const lockedView = document.getElementById('pastoral-locked-view');
+            const unlockedView = document.getElementById('pastoral-unlocked-view');
+            const authControls = document.getElementById('pastoral-auth-controls');
+            const lockPill = document.getElementById('pastoral-lock-pill');
+
+            if (state.pastoralUnlocked) {
+                lockedView.classList.add('hidden');
+                unlockedView.classList.remove('hidden');
+                lockPill.innerHTML = `<i class="fa-solid fa-lock-open text-[9px]"></i> Verified`;
+                lockPill.className = "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[10px] font-semibold px-2 py-0.5 rounded-md flex items-center gap-1";
+                authControls.innerHTML = `<button onclick="lockPastoralVault()" class="bg-amber-900 hover:bg-amber-950 text-white px-3.5 py-2 rounded-xl text-xs font-semibold transition flex items-center gap-1.5"><i class="fa-solid fa-lock"></i> Lock Vault</button>`;
+
+                document.getElementById('pastoral-logs-list').innerHTML = state.pastoralLogs.map(log => `
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-xs flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-2">
+                                <span class="text-xs font-bold px-2.5 py-0.5 rounded-md bg-amber-50 text-amber-800 border border-amber-200">${log.category}</span>
+                                <span class="text-xs font-semibold ${log.resolved ? 'text-emerald-600' : 'text-blue-600'}">
+                                    ${log.resolved ? '<i class="fa-solid fa-circle-check mr-1"></i>Follow-up Done' : `<i class="fa-regular fa-clock mr-1"></i>Next: ${log.followUp}`}
+                                </span>
+                            </div>
+                            <h5 class="font-bold text-slate-900 text-sm">${log.family}</h5>
+                            <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">${log.summary}</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                            <span class="text-slate-400">Logged by <strong class="text-slate-600">${log.pastor}</strong></span>
+                            ${!log.resolved ? `<button onclick="resolvePastoralLog('${log.id}')" class="text-emerald-600 hover:underline font-semibold">Mark Visited ✓</button>` : ''}
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                lockedView.classList.remove('hidden');
+                unlockedView.classList.add('hidden');
+                lockPill.innerHTML = `<i class="fa-solid fa-lock text-[9px]"></i> Restricted`;
+                lockPill.className = "bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-semibold px-2 py-0.5 rounded-md flex items-center gap-1";
+                authControls.innerHTML = '';
+            }
+        }
+
+        // ==================== INTERACTIVE ACTIONS & MODALS ====================
+        function unlockPastoralVault(e) {
+            e.preventDefault();
+            const pin = document.getElementById('pastoral-pin-input').value;
+            if (pin === '1234') {
+                state.pastoralUnlocked = true;
+                document.getElementById('pastoral-pin-input').value = '';
+                renderPastoral();
+                showToast('Pastoral Care vault unlocked (RA 10173 audit logged).', 'success');
+            } else {
+                showToast('Invalid Pastoral PIN. Use 1234 for demo access.', 'error');
+            }
+        }
+
+        function lockPastoralVault() {
+            state.pastoralUnlocked = false;
+            renderPastoral();
+            showToast('Pastoral Care vault locked.', 'info');
+        }
+
+        function resolvePastoralLog(id) {
+            const log = state.pastoralLogs.find(l => l.id === id);
+            if (log) {
+                log.resolved = true;
+                saveState();
+                showToast('Pastoral care follow-up marked completed.', 'success');
+            }
+        }
+
+        function adjustStockQuick(itemId, delta) {
+            const item = state.inventory.find(i => i.id === itemId);
+            if (!item) return;
+            if (item.current + delta < 0) {
+                showToast('Insufficient stock for that dispatch amount.', 'error');
+                return;
+            }
+            item.current += delta;
+            state.transactions.unshift({
+                id: 'TRX-' + Date.now(),
+                type: delta > 0 ? 'Inbound' : 'Outbound',
+                item: item.name,
+                qty: Math.abs(delta),
+                party: delta > 0 ? 'Quick Warehouse Restock' : 'Field Relief Dispatch',
+                date: 'Just now'
+            });
+            saveState();
+            showToast(`${delta > 0 ? 'Added' : 'Dispatched'} ${Math.abs(delta)} ${item.unit} of ${item.name}.`, 'success');
+        }
+
+        function cycleVolunteerStatus(volId) {
+            const vol = state.volunteers.find(v => v.id === volId);
+            if (!vol) return;
+            const order = ['Deployed', 'Standby', 'Off-Duty'];
+            vol.status = order[(order.indexOf(vol.status) + 1) % order.length];
+            saveState();
+            showToast(`${vol.name} is now ${vol.status}.`, 'info');
+        }
+
+        // ==================== MODAL BUILDERS ====================
+        function openModal(title, bodyHtml) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-body').innerHTML = bodyHtml;
+            document.getElementById('modal-backdrop').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('modal-backdrop').classList.add('hidden');
+        }
+
+        function openQuickRecordModal() {
+            openModal('Quick Operational Record', `
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <button onclick="openFamilyModal()" class="p-4 rounded-xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50/50 text-left transition group">
+                        <div class="w-9 h-9 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center mb-2.5 group-hover:bg-blue-600 group-hover:text-white transition">
+                            <i class="fa-solid fa-user-plus"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-900 text-sm">Register Family</h4>
+                        <p class="text-xs text-slate-500 mt-0.5">Add displaced household & needs</p>
+                    </button>
+                    <button onclick="openInventoryModal('inbound')" class="p-4 rounded-xl border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/50 text-left transition group">
+                        <div class="w-9 h-9 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center mb-2.5 group-hover:bg-emerald-600 group-hover:text-white transition">
+                            <i class="fa-solid fa-box-open"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-900 text-sm">Log Donation</h4>
+                        <p class="text-xs text-slate-500 mt-0.5">Record inbound relief supplies</p>
+                    </button>
+                    <button onclick="openVolunteerModal()" class="p-4 rounded-xl border border-slate-200 hover:border-purple-500 hover:bg-purple-50/50 text-left transition group">
+                        <div class="w-9 h-9 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center mb-2.5 group-hover:bg-purple-600 group-hover:text-white transition">
+                            <i class="fa-solid fa-hands-helping"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-900 text-sm">Deploy Volunteer</h4>
+                        <p class="text-xs text-slate-500 mt-0.5">Assign responder to a field team</p>
+                    </button>
+                    <button onclick="openEventModal()" class="p-4 rounded-xl border border-slate-200 hover:border-amber-500 hover:bg-amber-50/50 text-left transition group">
+                        <div class="w-9 h-9 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center mb-2.5 group-hover:bg-amber-500 group-hover:text-white transition">
+                            <i class="fa-solid fa-calendar-plus"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-900 text-sm">Schedule Operation</h4>
+                        <p class="text-xs text-slate-500 mt-0.5">Add distribution or visit shift</p>
+                    </button>
+                </div>
+            `);
+        }
+
+        function openFamilyModal() {
+            openModal('Register Affected Family', `
+                <form onsubmit="submitNewFamily(event)" class="space-y-4 text-sm">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Family / Household Name *</label>
+                            <input required id="f-name" placeholder="e.g., Magbanua Family" class="w-full px-3 py-2 border border-slate-300 rounded-xl focus:outline-none focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Household Head *</label>
+                            <input required id="f-head" placeholder="Full name" class="w-full px-3 py-2 border border-slate-300 rounded-xl focus:outline-none focus:border-blue-500">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Family Size *</label>
+                            <input required type="number" min="1" value="4" id="f-members" class="w-full px-3 py-2 border border-slate-300 rounded-xl focus:outline-none focus:border-blue-500">
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Barangay *</label>
+                            <input required id="f-barangay" placeholder="e.g., Brgy. Sto. Niño" class="w-full px-3 py-2 border border-slate-300 rounded-xl focus:outline-none focus:border-blue-500">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Current Evacuation / Shelter Site</label>
+                        <input id="f-evac" placeholder="e.g., Sto. Niño Elem. School" class="w-full px-3 py-2 border border-slate-300 rounded-xl focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Primary Relief Needs *</label>
+                        <input required id="f-needs" placeholder="e.g., Food packs, Potable Water, Hygiene kits" class="w-full px-3 py-2 border border-slate-300 rounded-xl focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1.5">Vulnerability Factors</label>
+                        <div class="flex flex-wrap gap-2 text-xs">
+                            ${['Senior Citizen', 'Infants/Toddlers', 'PWD Member', 'Pregnant Mother', 'Medical Need'].map(tag => `
+                                <label class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-50">
+                                    <input type="checkbox" name="f-vuln" value="${tag}" class="rounded text-blue-600">
+                                    <span>${tag}</span>
+                                </label>
+                            `).join('')}
+                        </div>
+                    </div>
+                    <div class="pt-2 flex justify-end gap-2">
+                        <button type="button" onclick="closeModal()" class="px-4 py-2 rounded-xl text-slate-600 hover:bg-slate-100 font-semibold">Cancel</button>
+                        <button type="submit" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold">Save Household</button>
+                    </div>
+                </form>
+            `);
+        }
+
+        function submitNewFamily(e) {
+            e.preventDefault();
+            const vulns = Array.from(document.querySelectorAll('input[name="f-vuln"]:checked')).map(cb => cb.value);
+            state.families.unshift({
+                id: 'FAM-' + Math.floor(200 + Math.random() * 800),
+                name: document.getElementById('f-name').value.trim(),
+                head: document.getElementById('f-head').value.trim(),
+                members: parseInt(document.getElementById('f-members').value, 10) || 1,
+                barangay: document.getElementById('f-barangay').value.trim(),
+                evacSite: document.getElementById('f-evac').value.trim() || 'Community Shelter',
+                needs: document.getElementById('f-needs').value.trim(),
+                vulnerabilities: vulns,
+                status: 'Pending',
+                notes: 'Newly registered intake profile.',
+                aidHistory: []
+            });
+            closeModal();
+            saveState();
+            showToast('Affected household added to priority queue.', 'success');
+        }
+
+        function openManageFamilyModal(familyId) {
+            const fam = state.families.find(f => f.id === familyId);
+            if (!fam) return;
+
+            openModal(`Manage Case: ${fam.name}`, `
+                <div class="space-y-4 text-sm">
+                    <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1 text-xs">
+                        <div class="flex justify-between">
+                            <span class="font-bold text-slate-800">${fam.barangay} • ${fam.evacSite}</span>
+                            <span class="font-semibold text-slate-500">${fam.members} members</span>
+                        </div>
+                        <p class="text-slate-600"><strong>Needs:</strong> ${fam.needs}</p>
+                        <p class="text-slate-500 italic">${fam.notes}</p>
+                    </div>
+
+                    <form onsubmit="updateFamilyCase(event, '${fam.id}')" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Update Aid Status</label>
+                            <select id="manage-status" class="w-full px-3 py-2 border border-slate-300 rounded-xl font-semibold text-slate-800">
+                                <option value="Pending" ${fam.status === 'Pending' ? 'selected' : ''}>Pending Initial Aid</option>
+                                <option value="Ongoing" ${fam.status === 'Ongoing' ? 'selected' : ''}>Ongoing Support</option>
+                                <option value="Completed" ${fam.status === 'Completed' ? 'selected' : ''}>Completed / Served</option>
+                            </select>
+                        </div>
+
+                        <div class="p-3.5 rounded-xl border border-blue-200 bg-blue-50/40 space-y-2.5">
+                            <p class="text-xs font-bold text-blue-900"><i class="fa-solid fa-box-open mr-1"></i> Optional: Dispatch Relief Supply Now</p>
+                            <div class="grid grid-cols-3 gap-2">
+                                <select id="dispatch-item" class="col-span-2 px-2.5 py-2 text-xs bg-white border border-slate-300 rounded-lg">
+                                    <option value="">-- No stock dispatch --</option>
+                                    ${state.inventory.map(i => `<option value="${i.id}">${i.name} (${i.current} left)</option>`).join('')}
+                                </select>
+                                <input type="number" id="dispatch-qty" min="1" value="1" class="px-2.5 py-2 text-xs bg-white border border-slate-300 rounded-lg">
+                            </div>
+                        </div>
+
+                        <div>
+                            <p class="text-xs font-semibold text-slate-700 mb-1">Aid History</p>
+                            <div class="text-xs text-slate-500 bg-slate-50 p-2.5 rounded-lg border border-slate-200/70">
+                                ${fam.aidHistory.length ? fam.aidHistory.map(h => `<div>• ${h}</div>`).join('') : 'No relief packs logged yet.'}
+                            </div>
+                        </div>
+
+                        <div class="flex justify-end gap-2 pt-2">
+                            <button type="button" onclick="closeModal()" class="px-4 py-2 rounded-xl text-slate-600 hover:bg-slate-100 font-semibold">Close</button>
+                            <button type="submit" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold">Save Update</button>
+                        </div>
+                    </form>
+                </div>
+            `);
+        }
+
+        function updateFamilyCase(e, familyId) {
+            e.preventDefault();
+            const fam = state.families.find(f => f.id === familyId);
+            if (!fam) return;
+
+            fam.status = document.getElementById('manage-status').value;
+            const dispatchItemId = document.getElementById('dispatch-item').value;
+            const dispatchQty = parseInt(document.getElementById('dispatch-qty').value, 10) || 0;
+
+            if (dispatchItemId && dispatchQty > 0) {
+                const invItem = state.inventory.find(i => i.id === dispatchItemId);
+                if (invItem) {
+                    if (invItem.current < dispatchQty) {
+                        showToast(`Not enough ${invItem.name} in stock!`, 'error');
+                        return;
+                    }
+                    invItem.current -= dispatchQty;
+                    fam.aidHistory.push(`${dispatchQty}x ${invItem.name} (Nov 19)`);
+                    state.transactions.unshift({
+                        id: 'TRX-' + Date.now(),
+                        type: 'Outbound',
+                        item: invItem.name,
+                        qty: dispatchQty,
+                        party: `${fam.name} (${fam.barangay})`,
+                        date: 'Just now'
+                    });
+                }
+            }
+
+            closeModal();
+            saveState();
+            showToast(`Updated record for ${fam.name}.`, 'success');
+        }
+
+        function openInventoryModal(mode) {
+            const isInbound = mode === 'inbound';
+            openModal(isInbound ? 'Log Inbound Donation' : 'Dispatch Relief Supplies', `
+                <form onsubmit="submitInventoryMovement(event, '${mode}')" class="space-y-4 text-sm">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Select Supply Item *</label>
+                        <select id="inv-item-id" class="w-full px-3 py-2 border border-slate-300 rounded-xl">
+                            ${state.inventory.map(i => `<option value="${i.id}">${i.name} (Current: ${i.current} ${i.unit})</option>`).join('')}
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Quantity *</label>
+                        <input required type="number" min="1" value="20" id="inv-qty" class="w-full px-3 py-2 border border-slate-300 rounded-xl">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">${isInbound ? 'Donor / Ministry Source *' : 'Destination Barangay / Team *'}</label>
+                        <input required id="inv-party" placeholder="${isInbound ? 'e.g., JCCF Choir & Music Ministry' : 'e.g., Brgy. Sto. Niño Relief Drop'}" class="w-full px-3 py-2 border border-slate-300 rounded-xl">
+                    </div>
+                    <div class="flex justify-end gap-2 pt-2">
+                        <button type="button" onclick="closeModal()" class="px-4 py-2 rounded-xl text-slate-600 hover:bg-slate-100 font-semibold">Cancel</button>
+                        <button type="submit" class="px-4 py-2 rounded-xl ${isInbound ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-blue-600 hover:bg-blue-700'} text-white font-semibold">
+                            ${isInbound ? 'Record Inbound' : 'Confirm Dispatch'}
+                        </button>
+                    </div>
+                </form>
+            `);
+        }
+
+        function submitInventoryMovement(e, mode) {
+            e.preventDefault();
+            const item = state.inventory.find(i => i.id === document.getElementById('inv-item-id').value);
+            const qty = parseInt(document.getElementById('inv-qty').value, 10);
+            const party = document.getElementById('inv-party').value.trim();
+
+            if (mode === 'outbound' && item.current < qty) {
+                showToast('Insufficient warehouse inventory for dispatch.', 'error');
+                return;
+            }
+            item.current += mode === 'inbound' ? qty : -qty;
+            state.transactions.unshift({
+                id: 'TRX-' + Date.now(),
+                type: mode === 'inbound' ? 'Inbound' : 'Outbound',
+                item: item.name,
+                qty,
+                party,
+                date: 'Just now'
+            });
+            closeModal();
+            saveState();
+            showToast(`${mode === 'inbound' ? 'Inbound donation' : 'Stock dispatch'} recorded.`, 'success');
+        }
+
+        function openVolunteerModal() {
+            openModal('Register & Assign Volunteer', `
+                <form onsubmit="submitNewVolunteer(event)" class="space-y-4 text-sm">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Full Name *</label>
+                        <input required id="v-name" placeholder="e.g., Bro. Paolo Mercado" class="w-full px-3 py-2 border border-slate-300 rounded-xl">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Primary Skill / Role *</label>
+                            <input required id="v-role" placeholder="e.g., Logistics / First Aid" class="w-full px-3 py-2 border border-slate-300 rounded-xl">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Church Ministry *</label>
+                            <input required id="v-ministry" placeholder="e.g., Youth Ministry" class="w-full px-3 py-2 border border-slate-300 rounded-xl">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Contact Number</label>
+                            <input id="v-phone" placeholder="0917-000-0000" class="w-full px-3 py-2 border border-slate-300 rounded-xl">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Initial Status</label>
+                            <select id="v-status" class="w-full px-3 py-2 border border-slate-300 rounded-xl">
+                                <option value="Deployed">Deployed</option>
+                                <option value="Standby">Standby</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Field Assignment *</label>
+                        <input required id="v-assign" placeholder="e.g., Brgy. San Jose Relief Team" class="w-full px-3 py-2 border border-slate-300 rounded-xl">
+                    </div>
+                    <div class="flex justify-end gap-2 pt-2">
+                        <button type="button" onclick="closeModal()" class="px-4 py-2 rounded-xl text-slate-600 hover:bg-slate-100 font-semibold">Cancel</button>
+                        <button type="submit" class="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-semibold">Add Volunteer</button>
+                    </div>
+                </form>
+            `);
+        }
+
+        function submitNewVolunteer(e) {
+            e.preventDefault();
+            state.volunteers.unshift({
+                id: 'VOL-' + Date.now(),
+                name: document.getElementById('v-name').value.trim(),
+                role: document.getElementById('v-role').value.trim(),
+                ministry: document.getElementById('v-ministry').value.trim(),
+                phone: document.getElementById('v-phone').value.trim() || 'On file',
+                status: document.getElementById('v-status').value,
+                assignment: document.getElementById('v-assign').value.trim()
+            });
+            closeModal();
+            saveState();
+            showToast('Volunteer added to deployment matrix.', 'success');
+        }
+
+        function openEventModal(presetDate = selectedCalendarDate) {
+            openModal('Schedule Operational Event', `
+                <form onsubmit="submitNewEvent(event)" class="space-y-4 text-sm">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Operation Title *</label>
+                        <input required id="e-title" placeholder="e.g., Relief Pack Distribution - Brgy. Maligaya" class="w-full px-3 py-2 border border-slate-300 rounded-xl">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Date (Nov 2026) *</label>
+                            <input required type="date" id="e-date" value="${presetDate}" min="2026-11-01" max="2026-11-30" class="w-full px-3 py-2 border border-slate-300 rounded-xl">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Category *</label>
+                            <select id="e-type" class="w-full px-3 py-2 border border-slate-300 rounded-xl">
+                                <option value="Relief">Relief Distribution</option>
+                                <option value="Pastoral">Pastoral Visit</option>
+                                <option value="Logistics">Logistics & Packing</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Time Window *</label>
+                            <input required id="e-time" value="08:00 AM - 12:00 PM" class="w-full px-3 py-2 border border-slate-300 rounded-xl">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Location *</label>
+                            <input required id="e-loc" placeholder="Barangay / Hall" class="w-full px-3 py-2 border border-slate-300 rounded-xl">
+                        </div>
+                    </div>
+                    <div class="flex justify-end gap-2 pt-2">
+                        <button type="button" onclick="closeModal()" class="px-4 py-2 rounded-xl text-slate-600 hover:bg-slate-100 font-semibold">Cancel</button>
+                        <button type="submit" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold">Add to Calendar</button>
+                    </div>
+                </form>
+            `);
+        }
+
+        function submitNewEvent(e) {
+            e.preventDefault();
+            const dateVal = document.getElementById('e-date').value;
+            state.events.push({
+                id: 'EVT-' + Date.now(),
+                date: dateVal,
+                title: document.getElementById('e-title').value.trim(),
+                type: document.getElementById('e-type').value,
+                time: document.getElementById('e-time').value.trim(),
+                location: document.getElementById('e-loc').value.trim()
+            });
+            selectedCalendarDate = dateVal;
+            closeModal();
+            saveState();
+            showToast('Scheduled operation added to calendar.', 'success');
+        }
+
+        function openPastoralModal() {
+            openModal('Log Confidential Pastoral Note', `
+                <form onsubmit="submitPastoralLog(event)" class="space-y-4 text-sm">
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Household / Individual *</label>
+                            <input required id="p-family" placeholder="e.g., Santos Family" class="w-full px-3 py-2 border border-slate-300 rounded-xl">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Care Type *</label>
+                            <select id="p-cat" class="w-full px-3 py-2 border border-slate-300 rounded-xl">
+                                <option value="Home Visit & Prayer">Home Visit & Prayer</option>
+                                <option value="Spiritual Counseling">Spiritual Counseling</option>
+                                <option value="Trauma Debriefing">Trauma Debriefing</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Confidential Summary & Prayer Needs *</label>
+                        <textarea required id="p-summary" rows="3" placeholder="Enter pastoral care notes..." class="w-full px-3 py-2 border border-slate-300 rounded-xl"></textarea>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Attending Pastor *</label>
+                            <input required id="p-pastor" value="Ptr. Jonathan Reyes" class="w-full px-3 py-2 border border-slate-300 rounded-xl">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Follow-up Target</label>
+                            <input id="p-followup" value="Nov 23, 2026" class="w-full px-3 py-2 border border-slate-300 rounded-xl">
+                        </div>
+                    </div>
+                    <div class="flex justify-end gap-2 pt-2">
+                        <button type="button" onclick="closeModal()" class="px-4 py-2 rounded-xl text-slate-600 hover:bg-slate-100 font-semibold">Cancel</button>
+                        <button type="submit" class="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-semibold">Save Encrypted Log</button>
+                    </div>
+                </form>
+            `);
+        }
+
+        function submitPastoralLog(e) {
+            e.preventDefault();
+            state.pastoralLogs.unshift({
+                id: 'PAS-' + Date.now(),
+                family: document.getElementById('p-family').value.trim(),
+                category: document.getElementById('p-cat').value,
+                summary: document.getElementById('p-summary').value.trim(),
+                pastor: document.getElementById('p-pastor').value.trim(),
+                followUp: document.getElementById('p-followup').value.trim() || 'TBD',
+                resolved: false
+            });
+            closeModal();
+            saveState();
+            showToast('Confidential pastoral log saved.', 'success');
+        }
+
+        // ==================== TOAST NOTIFICATIONS ====================
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const styles = {
+                success: 'bg-slate-900 text-white border-emerald-500/40',
+                error: 'bg-rose-950 text-white border-rose-500/40',
+                info: 'bg-slate-900 text-white border-blue-500/40'
+            };
+            const icons = {
+                success: '<i class="fa-solid fa-circle-check text-emerald-400"></i>',
+                error: '<i class="fa-solid fa-circle-exclamation text-rose-400"></i>',
+                info: '<i class="fa-solid fa-circle-info text-blue-400"></i>'
+            };
+            const toast = document.createElement('div');
+            toast.className = `pointer-events-auto flex items-center gap-2.5 px-4 py-3 rounded-xl border shadow-xl text-xs font-semibold animate-view ${styles[type]}`;
+            toast.innerHTML = `${icons[type]}<span>${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.25s ease';
+                setTimeout(() => toast.remove(), 250);
+            }, 3000);
+        }
+
+        // Keyboard Escape listener for modal
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Initial Boot
+        initializeTheme();
+        switchTab('dashboard');
+        refreshAllViews();
     </script>
 </body>
 </html>
